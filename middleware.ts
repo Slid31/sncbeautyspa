@@ -3,7 +3,7 @@ import { authConfig } from "@/auth.config";
 import createMiddleware from "next-intl/middleware";
 import { routing } from "@/i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
-import type { UserRole } from "@prisma/client/client";
+import type { UserRole } from "@/app/generated/prisma/client";
 
 // Edge-safe auth — built from authConfig which has no bcrypt/prisma imports
 const { auth } = NextAuth(authConfig);

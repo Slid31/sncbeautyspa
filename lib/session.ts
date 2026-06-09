@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import type { UserRole } from "@prisma/client/client";
+import type { UserRole } from "@/app/generated/prisma/client";
 
 /** Require an authenticated session. Redirects to /login if not present. */
 export async function requireAuth() {
