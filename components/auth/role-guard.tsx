@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import type { UserRole } from "@/app/generated/prisma/client";
+import type { UserRole } from "@prisma/client/client";
 
 interface Props {
   allow: UserRole[];
