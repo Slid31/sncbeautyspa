@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   params: Promise<{ locale: string; appointmentId: string }>;
@@ -6,7 +6,7 @@ type Props = {
 
 export default async function ConfirmationPage({ params }: Props) {
   const { appointmentId } = await params;
-  const t = useTranslations("confirmation");
+  const t = await getTranslations("confirmation");
 
   return (
     <div>

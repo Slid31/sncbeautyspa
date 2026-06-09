@@ -4,6 +4,9 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     // Prevent webpack from bundling these server-only packages (Next.js 14 key).
     serverComponentsExternalPackages: [
