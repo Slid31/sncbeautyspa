@@ -1,0 +1,214 @@
+// SNC Beauty Salon & Spa — Prisma Schema
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// Auth / Staff
+// ─────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(STAFF)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────
+// Catalog
+// ─────────────────────────────────────────────
+
+model ServiceCategory {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  image       String?
+  createdAt   DateTime  @default(now())
+
+  services   Service[]
+  intakeForm IntakeForm?
+
+  @@map("service_categories")
+}
+
+model Service {
+  id          String          @id @default(cuid())
+  name        String
+  description String?
+  /// Price in dollars (e.g. 75.00)
+  price       Decimal         @db.Decimal(10, 2)
+  /// Duration in minutes
+  duration    Int
+  categoryId  String
+  image       String?
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+
+  category            ServiceCategory      @relation(fields: [categoryId], references: [id])
+  appointmentServices AppointmentService[]
+
+  @@index([categoryId])
+  @@index([isActive])
+  @@map("services")
+}
+
+// ─────────────────────────────────────────────
+// Intake Forms
+// ─────────────────────────────────────────────
+
+/// One intake form per category (optional). fields is an array of FormField objects:
+/// { label: string, type: "text"|"select"|"checkbox"|"date"|"textarea", options?: string[], required: boolean }
+model IntakeForm {
+  id         String   @id @default(cuid())
+  categoryId String   @unique
+  /// JSON array of { label, type, options, required }
+  fields     Json
+  createdAt  DateTime @default(now())
+
+  category  ServiceCategory      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  responses IntakeFormResponse[]
+
+  @@map("intake_forms")
+}
+
+// ─────────────────────────────────────────────
+// Clients (no auth — identified by email)
+// ─────────────────────────────────────────────
+
+model Client {
+  id           String        @id @default(cuid())
+  firstName    String
+  lastName     String
+  email        String        @unique
+  phone        String?
+  createdAt    DateTime      @default(now())
+
+  appointments Appointment[]
+
+  @@index([email])
+  @@map("clients")
+}
+
+// ─────────────────────────────────────────────
+// Appointments
+// ─────────────────────────────────────────────
+
+model Appointment {
+  id                   String            @id @default(cuid())
+  clientId             String
+  /// Date and start time of the appointment
+  date                 DateTime
+  status               AppointmentStatus @default(PENDING)
+  totalAmount          Decimal           @db.Decimal(10, 2)
+  paymentStatus        PaymentStatus     @default(UNPAID)
+  stripePaymentIntentId String?          @unique
+  /// UUID sent to client email for self-cancellation (no auth required)
+  cancelToken          String            @unique @default(uuid())
+  createdAt            DateTime          @default(now())
+
+  client              Client               @relation(fields: [clientId], references: [id])
+  services            AppointmentService[]
+  intakeFormResponse  IntakeFormResponse?
+  transaction         Transaction?
+
+  @@index([clientId])
+  @@index([date])
+  @@index([status])
+  @@index([paymentStatus])
+  @@map("appointments")
+}
+
+/// Line items — one row per service booked in an appointment
+model AppointmentService {
+  id            String   @id @default(cuid())
+  appointmentId String
+  serviceId     String
+  /// Price locked at booking time, independent of future Service.price changes
+  priceSnapshot Decimal  @db.Decimal(10, 2)
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  service     Service     @relation(fields: [serviceId], references: [id])
+
+  @@unique([appointmentId, serviceId])
+  @@index([appointmentId])
+  @@index([serviceId])
+  @@map("appointment_services")
+}
+
+// ─────────────────────────────────────────────
+// Intake Form Responses
+// ─────────────────────────────────────────────
+
+/// One response per appointment; responses mirrors the IntakeForm.fields structure
+model IntakeFormResponse {
+  id            String   @id @default(cuid())
+  appointmentId String   @unique
+  formId        String
+  /// JSON object mapping field labels → submitted values
+  responses     Json
+  createdAt     DateTime @default(now())
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  form        IntakeForm  @relation(fields: [formId], references: [id])
+
+  @@index([formId])
+  @@map("intake_form_responses")
+}
+
+// ─────────────────────────────────────────────
+// Payments
+// ─────────────────────────────────────────────
+
+model Transaction {
+  id            String            @id @default(cuid())
+  appointmentId String            @unique
+  amount        Decimal           @db.Decimal(10, 2)
+  currency      String            @default("USD")
+  stripeChargeId String?          @unique
+  status        TransactionStatus @default(PENDING)
+  createdAt     DateTime          @default(now())
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id])
+
+  @@map("transactions")
+}
+
+// ─────────────────────────────────────────────
+// Enums
+// ─────────────────────────────────────────────
+
+enum UserRole {
+  ADMIN
+  STAFF
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+}
+
+enum TransactionStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
