@@ -5,10 +5,10 @@ import { CategoriesView, type CategoryItem } from "./_components/categories-view
 type Props = { params: Promise<{ locale: string }> };
 
 export default async function ServicesPage({ params }: Props) {
-  const [{ locale }, t] = await Promise.all([params, getTranslations("services")]);
+  const [, t] = await Promise.all([params, getTranslations("services")]);
 
   const raw = await prisma.serviceCategory.findMany({
-    orderBy: { createdAt: "asc" },
+    orderBy: { order: "asc" },
     select: {
       id: true,
       name: true,
@@ -55,7 +55,7 @@ export default async function ServicesPage({ params }: Props) {
       {categories.length === 0 ? (
         <p className="text-center text-slate-400 py-16">{t("noResults")}</p>
       ) : (
-        <CategoriesView categories={categories} locale={locale} />
+        <CategoriesView categories={categories} />
       )}
     </div>
   );

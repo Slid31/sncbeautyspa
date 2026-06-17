@@ -194,35 +194,63 @@ export async function confirmBySession(
       // Unique constraint: already created by webhook — safe to ignore.
     }
 
-    // Send email (only reached when this is the first confirmer)
-    const appt = await prisma.appointment.findUnique({
-      where: { id: appointmentId },
-      select: {
-        cancelToken: true,
-        date: true,
-        totalAmount: true,
-        client: { select: { firstName: true, email: true } },
-        services: {
-          select: {
-            priceSnapshot: true,
-            service: { select: { name: true } },
+    // Retrieve card last4 from Stripe (non-fatal)
+    let cardLast4: string | undefined;
+    if (paymentIntentId) {
+      try {
+        const pi = await stripe.paymentIntents.retrieve(paymentIntentId, {
+          expand: ["latest_charge"],
+        });
+        if (pi.latest_charge && typeof pi.latest_charge === "object") {
+          const charge = pi.latest_charge as import("stripe").default.Charge;
+          cardLast4 = charge.payment_method_details?.card?.last4 ?? undefined;
+        }
+      } catch {
+        // Non-fatal
+      }
+    }
+
+    // Send combined confirmation + receipt email (only reached when this is the first confirmer)
+    const [appt, tx] = await Promise.all([
+      prisma.appointment.findUnique({
+        where: { id: appointmentId },
+        select: {
+          cancelToken: true,
+          date: true,
+          totalAmount: true,
+          client: { select: { firstName: true, email: true } },
+          services: {
+            select: {
+              priceSnapshot: true,
+              service: { select: { name: true, duration: true } },
+            },
           },
         },
-      },
-    });
+      }),
+      prisma.transaction.findUnique({ where: { appointmentId } }),
+    ]);
 
     if (appt) {
+      const { generateIntakeToken } = await import(
+        "@/app/[locale]/(public)/book/actions"
+      );
+      const intakeToken = await generateIntakeToken(appointmentId, appt.date);
+
       await sendConfirmationEmail({
         clientFirstName: appt.client.firstName,
         clientEmail: appt.client.email,
         appointmentDate: appt.date,
         services: appt.services.map((s) => ({
           name: s.service.name,
+          duration: s.service.duration,
           price: s.priceSnapshot.toFixed(2),
         })),
         totalAmount: appt.totalAmount.toFixed(2),
         cancelToken: appt.cancelToken,
         locale,
+        transactionId: tx?.id ?? appointmentId,
+        paymentDate: tx?.createdAt ?? new Date(),
+        cardLast4,
       });
     }
   } catch (e) {

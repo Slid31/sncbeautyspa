@@ -6,7 +6,7 @@ import type { CategoryListItem } from "./actions";
 type Props = { params: Promise<{ locale: string }> };
 
 export default async function AdminIntakeFormsPage({ params }: Props) {
-  const [{ locale }] = await Promise.all([params, requireAuth()]);
+  await requireAuth();
 
   const raw = await prisma.serviceCategory.findMany({
     orderBy: { name: "asc" },
@@ -25,5 +25,5 @@ export default async function AdminIntakeFormsPage({ params }: Props) {
     formId: c.intakeForm?.id ?? null,
   }));
 
-  return <CategoriesListClient categories={categories} locale={locale} />;
+  return <CategoriesListClient categories={categories} />;
 }

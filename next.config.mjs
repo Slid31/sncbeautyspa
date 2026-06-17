@@ -15,6 +15,7 @@ const nextConfig = {
       "@prisma/adapter-pg",
       "pg",
       "pg-native",
+      "node-cron",
     ],
   },
 

@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default async function IntakeFormBuilderPage({ params }: Props) {
-  const [{ locale, formId: categoryId }] = await Promise.all([
+  const [{ formId: categoryId }] = await Promise.all([
     params,
     requireAuth(),
   ]);
@@ -39,5 +39,5 @@ export default async function IntakeFormBuilderPage({ params }: Props) {
     fields,
   };
 
-  return <FormBuilder data={data} locale={locale} />;
+  return <FormBuilder data={data} />;
 }

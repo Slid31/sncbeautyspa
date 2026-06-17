@@ -13,7 +13,6 @@ interface Props {
   appointment: AppointmentDetail;
   token: string;
   locale: string;
-  base: string;
 }
 
 function formatDate(date: Date, locale: string): string {
@@ -29,7 +28,7 @@ function formatDate(date: Date, locale: string): string {
 
 type State = "idle" | "loading" | "cancelled" | "error";
 
-export function CancelForm({ appointment: appt, token, locale, base }: Props) {
+export function CancelForm({ appointment: appt, token, locale }: Props) {
   const t = useTranslations("cancellation");
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -69,7 +68,7 @@ export function CancelForm({ appointment: appt, token, locale, base }: Props) {
         </div>
         <div className="flex flex-col gap-3 pt-2">
           <Link
-            href={`${base}/book`}
+            href={"/book"}
             className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-pink-600 text-white text-sm font-medium hover:bg-pink-700 transition-colors"
           >
             {t("bookAnother")}
@@ -159,7 +158,7 @@ export function CancelForm({ appointment: appt, token, locale, base }: Props) {
         </Button>
 
         <Link
-          href={`${base}/booking/confirmation?token=${token}`}
+          href={`/booking/confirmation?token=${token}`}
           className="flex items-center justify-center w-full rounded-full border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-700 hover:border-pink-300 hover:text-pink-700 transition-colors"
         >
           {t("keepButton")}

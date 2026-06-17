@@ -36,12 +36,10 @@ export type CategoryItem = {
 
 interface Props {
   categories: CategoryItem[];
-  locale: string;
 }
 
-export function CategoriesView({ categories, locale }: Props) {
+export function CategoriesView({ categories }: Props) {
   const t = useTranslations("services");
-  const base = locale === "fr" ? "/fr" : "";
 
   // All categories start collapsed; auto-open single category
   const [openIds, setOpenIds] = useState<Set<string>>(
@@ -132,7 +130,7 @@ export function CategoriesView({ categories, locale }: Props) {
                     {cat.services.map((svc) => (
                       <Link
                         key={svc.id}
-                        href={`${base}/services/${svc.id}`}
+                        href={`/services/${svc.id}`}
                         className="group flex flex-col rounded-xl border border-slate-200 bg-white hover:border-pink-200 hover:shadow-sm transition-all overflow-hidden"
                       >
                         {/* Service image */}

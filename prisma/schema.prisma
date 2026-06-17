@@ -35,11 +35,13 @@ model ServiceCategory {
   name        String
   description String?
   image       String?
+  order       Int       @default(0)
   createdAt   DateTime  @default(now())
 
   services   Service[]
   intakeForm IntakeForm?
 
+  @@index([order])
   @@map("service_categories")
 }
 
@@ -115,8 +117,14 @@ model Appointment {
   paymentStatus        PaymentStatus     @default(UNPAID)
   stripePaymentIntentId String?          @unique
   /// UUID sent to client email for self-cancellation (no auth required)
-  cancelToken          String            @unique @default(uuid())
-  createdAt            DateTime          @default(now())
+  cancelToken              String            @unique @default(uuid())
+  /// UUID sent by email after payment — used to access the intake form page
+  intakeFormToken          String?           @unique
+  intakeFormTokenExpiresAt DateTime?
+  intakeFormCompletedAt    DateTime?
+  /// Locale ("en" | "fr") stored at booking time for locale-aware emails
+  locale                   String            @default("en")
+  createdAt                DateTime          @default(now())
 
   client              Client               @relation(fields: [clientId], references: [id])
   services            AppointmentService[]

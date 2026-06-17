@@ -87,10 +87,8 @@ function StatusBadge({
 
 function NotFoundView({
   t,
-  base,
 }: {
   t: Awaited<ReturnType<typeof getTranslations<"appointment">>>;
-  base: string;
 }) {
   return (
     <div className="max-w-md mx-auto px-4 py-20 text-center space-y-6">
@@ -102,7 +100,7 @@ function NotFoundView({
         <p className="text-sm text-slate-500">{t("notFoundSubtitle")}</p>
       </div>
       <Link
-        href={`${base}/book`}
+        href={"/book"}
         className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-pink-600 text-white text-sm font-medium hover:bg-pink-700 transition-colors"
       >
         {t("bookAnother")}
@@ -117,11 +115,10 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
   const { locale } = await params;
   const token = searchParams.token ?? "";
   const sessionId = searchParams.session_id ?? "";
-  const base = locale === "fr" ? "/fr" : "";
 
   const t = await getTranslations("appointment");
 
-  if (!token) return <NotFoundView t={t} base={base} />;
+  if (!token) return <NotFoundView t={t} />;
 
   // ── Page-side confirm fallback ─────────────────────────────────────────────
   // Runs idempotently before fetching so the displayed status is always accurate
@@ -131,7 +128,7 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
   }
 
   const result = await getAppointmentByToken(token);
-  if (!result.ok) return <NotFoundView t={t} base={base} />;
+  if (!result.ok) return <NotFoundView t={t} />;
 
   const { appointment: appt } = result;
   const dateFormatted = formatDate(new Date(appt.date), locale);
@@ -285,7 +282,7 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
       <div className="flex flex-col gap-3">
         {appt.canCancel && (
           <Link
-            href={`${base}/booking/cancel?token=${token}`}
+            href={`/booking/cancel?token=${token}`}
             className="flex items-center justify-center gap-2 w-full rounded-full border-2 border-red-300 bg-white px-6 py-2.5 text-sm font-semibold text-red-600 hover:bg-red-50 hover:border-red-400 transition-colors"
           >
             <XCircle className="h-4 w-4" />
@@ -294,7 +291,7 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
         )}
 
         <Link
-          href={`${base}/book`}
+          href={"/book"}
           className="flex items-center justify-center gap-2 w-full rounded-full border border-slate-200 bg-white px-6 py-2.5 text-sm font-medium text-slate-600 hover:border-pink-300 hover:text-pink-700 transition-colors"
         >
           {t("bookAnother")}

@@ -8,7 +8,6 @@ import type { CategoryWithServices, ServiceOption, ClientInfo, BookingDraft } fr
 import { StepServices } from "./step-services";
 import { StepClientInfo } from "./step-client-info";
 import { StepDateTime } from "./step-date-time";
-import { StepIntakeForms } from "./step-intake-forms";
 import { StepSummary } from "./step-summary";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
@@ -31,7 +30,6 @@ const EMPTY_DRAFT: BookingDraft = {
   client: EMPTY_CLIENT,
   date: "",
   timeSlot: "",
-  intakeAnswers: {},
 };
 
 // ── Step indicator ─────────────────────────────────────────────────────────────
@@ -116,29 +114,14 @@ export function BookingWizard({ catalog, locale, preSelectServiceId }: Props) {
     }
   }, [preSelectServiceId, catalog]);
 
-  const needsIntake = draft.services.some((s) => s.intakeFormId !== null);
-
   const stepLabels: string[] = [
     t("steps.services"),
     t("steps.clientInfo"),
     t("steps.dateTime"),
-    ...(needsIntake ? [t("steps.intakeForms")] : []),
     t("steps.review"),
   ];
 
-  // Map logical step indices (always 0-4) to display position
-  // 0=services, 1=client, 2=datetime, 3=intake(optional), 4=review
-  const REVIEW_STEP = needsIntake ? 4 : 3;
-  const displayStep = needsIntake ? step : step > 3 ? step - 1 : step;
-
-  function nextStep() {
-    if (step === 2 && !needsIntake) setStep(3);
-    else setStep((s) => s + 1);
-  }
-  function prevStep() {
-    if (step === 3 && !needsIntake) setStep(2);
-    else setStep((s) => s - 1);
-  }
+  const REVIEW_STEP = 3;
 
   function setServices(services: ServiceOption[]) {
     setDraft((d) => ({ ...d, services }));
@@ -152,19 +135,13 @@ export function BookingWizard({ catalog, locale, preSelectServiceId }: Props) {
     setDraft((d) => ({ ...d, date, timeSlot }));
   }
 
-  function setIntakeAnswers(
-    intakeAnswers: Record<string, Record<string, unknown>>
-  ) {
-    setDraft((d) => ({ ...d, intakeAnswers }));
-  }
-
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
       <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 text-center mb-6">
         {t("title")}
       </h1>
 
-      <StepDots steps={stepLabels} current={displayStep} />
+      <StepDots steps={stepLabels} current={step} />
 
       {step === 0 && (
         <StepServices
@@ -177,7 +154,7 @@ export function BookingWizard({ catalog, locale, preSelectServiceId }: Props) {
       {step === 1 && (
         <StepClientInfo
           initial={draft.client}
-          onBack={prevStep}
+          onBack={() => setStep(0)}
           onNext={(client) => {
             setClient(client);
             setStep(2);
@@ -189,27 +166,18 @@ export function BookingWizard({ catalog, locale, preSelectServiceId }: Props) {
           totalDuration={draft.services.reduce((s, svc) => s + svc.duration, 0)}
           date={draft.date}
           timeSlot={draft.timeSlot}
-          onBack={prevStep}
+          onBack={() => setStep(1)}
           onNext={(date, slot) => {
             setDateTime(date, slot);
-            nextStep();
+            setStep(3);
           }}
-        />
-      )}
-      {step === 3 && needsIntake && (
-        <StepIntakeForms
-          services={draft.services}
-          answers={draft.intakeAnswers}
-          onChange={setIntakeAnswers}
-          onBack={prevStep}
-          onNext={() => setStep(4)}
         />
       )}
       {step === REVIEW_STEP && (
         <StepSummary
           draft={draft}
           locale={locale}
-          onBack={prevStep}
+          onBack={() => setStep(2)}
         />
       )}
     </div>

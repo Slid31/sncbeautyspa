@@ -15,13 +15,11 @@ type Translations = Awaited<ReturnType<typeof getTranslations<"cancellation">>>;
 
 function ErrorView({
   t,
-  base,
   message,
   icon,
   token,
 }: {
   t: Translations;
-  base: string;
   message: string;
   icon: "not_found" | "cancelled" | "completed" | "too_late";
   token?: string;
@@ -55,7 +53,7 @@ function ErrorView({
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         {token && (
           <Link
-            href={`${base}/booking/confirmation?token=${token}`}
+            href={`/booking/confirmation?token=${token}`}
             className="inline-flex items-center justify-center px-5 py-2 rounded-full border border-slate-200 text-slate-700 text-sm font-medium hover:border-pink-300 hover:text-pink-700 transition-colors"
           >
             <ArrowLeft className="h-4 w-4 mr-1.5" />
@@ -63,7 +61,7 @@ function ErrorView({
           </Link>
         )}
         <Link
-          href={`${base}/book`}
+          href={"/book"}
           className="inline-flex items-center justify-center px-5 py-2 rounded-full bg-pink-600 text-white text-sm font-medium hover:bg-pink-700 transition-colors"
         >
           {t("bookAnother")}
@@ -78,19 +76,18 @@ function ErrorView({
 export default async function CancelPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const token = searchParams.token ?? "";
-  const base = locale === "fr" ? "/fr" : "";
 
   const t = await getTranslations("cancellation");
 
   // ── No token ───────────────────────────────────────────────────────────────
   if (!token) {
-    return <ErrorView t={t} base={base} message={t("notFound")} icon="not_found" />;
+    return <ErrorView t={t} message={t("notFound")} icon="not_found" />;
   }
 
   const result = await getAppointmentByToken(token);
 
   if (!result.ok) {
-    return <ErrorView t={t} base={base} message={t("notFound")} icon="not_found" />;
+    return <ErrorView t={t} message={t("notFound")} icon="not_found" />;
   }
 
   const { appointment: appt } = result;
@@ -100,8 +97,7 @@ export default async function CancelPage({ params, searchParams }: Props) {
     return (
       <ErrorView
         t={t}
-        base={base}
-        message={t("alreadyCancelled")}
+               message={t("alreadyCancelled")}
         icon="cancelled"
         token={token}
       />
@@ -113,8 +109,7 @@ export default async function CancelPage({ params, searchParams }: Props) {
     return (
       <ErrorView
         t={t}
-        base={base}
-        message={t("completed")}
+               message={t("completed")}
         icon="completed"
         token={token}
       />
@@ -126,8 +121,7 @@ export default async function CancelPage({ params, searchParams }: Props) {
     return (
       <ErrorView
         t={t}
-        base={base}
-        message={t("tooLate")}
+               message={t("tooLate")}
         icon="too_late"
         token={token}
       />
@@ -139,7 +133,7 @@ export default async function CancelPage({ params, searchParams }: Props) {
     <div className="max-w-lg mx-auto px-4 sm:px-6 py-12 sm:py-16 space-y-6">
       {/* Back link */}
       <Link
-        href={`${base}/booking/confirmation?token=${token}`}
+        href={`/booking/confirmation?token=${token}`}
         className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-pink-600 transition-colors"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -154,8 +148,7 @@ export default async function CancelPage({ params, searchParams }: Props) {
         appointment={appt}
         token={token}
         locale={locale}
-        base={base}
-      />
+             />
     </div>
   );
 }

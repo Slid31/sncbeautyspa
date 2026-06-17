@@ -26,7 +26,6 @@ function formatDate(date: Date, locale: string) {
 export default async function ConfirmationPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const { session_id, token } = searchParams;
-  const base = locale === "fr" ? "/fr" : "";
   const [t, tb, tn] = await Promise.all([
     getTranslations("confirmation"),
     getTranslations("booking"),
@@ -61,7 +60,7 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
           </p>
         </div>
         <Link
-          href={`${base}/book`}
+          href={"/book"}
           className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-pink-600 text-white text-sm font-medium hover:bg-pink-700 transition-colors"
         >
           {t("bookAnother")}
@@ -162,14 +161,14 @@ export default async function ConfirmationPage({ params, searchParams }: Props) 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-3 justify-center">
         <Link
-          href={`${base}/book`}
+          href={"/book"}
           className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-pink-600 text-white text-sm font-medium hover:bg-pink-700 transition-colors"
         >
           {t("bookAnother")}
           <ArrowRight className="h-4 w-4" />
         </Link>
         <Link
-          href={`${base}/`}
+          href={"/"}
           className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-slate-200 text-slate-700 text-sm font-medium hover:border-pink-300 hover:text-pink-700 transition-colors"
         >
           {tn("home")}

@@ -15,8 +15,6 @@ export default async function ServiceDetailPage({ params }: Props) {
     getTranslations("services"),
   ]);
 
-  const base = locale === "fr" ? "/fr" : "";
-
   const service = await prisma.service.findUnique({
     where: { id: slug, isActive: true },
     select: {
@@ -38,7 +36,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
       {/* Back link */}
       <Link
-        href={`${base}/services`}
+        href={"/services"}
         className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-pink-600 transition-colors mb-8"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -108,7 +106,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           {/* Book CTA */}
           <div className="mt-auto pt-2">
             <Link
-              href={`${base}/book/${service.id}`}
+              href={`/book/${service.id}`}
               className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-3.5 rounded-full bg-pink-600 text-white font-semibold text-base hover:bg-pink-700 active:scale-95 transition-all shadow-lg shadow-pink-200"
             >
               {t("bookNow")}

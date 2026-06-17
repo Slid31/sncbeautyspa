@@ -46,7 +46,9 @@ import {
   Mail,
   DollarSign,
   FileText,
+  ExternalLink,
 } from "lucide-react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   getAppointmentDetail,
@@ -280,6 +282,16 @@ function DetailDialog({
               {t("detailTitle")}
             </DialogTitle>
           </DialogHeader>
+
+          {detail && (
+            <Link
+              href={`/${locale}/admin/appointments/${detail.id}`}
+              className="inline-flex items-center gap-1.5 text-xs text-pink-600 hover:text-pink-800 transition-colors"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              {t("detailTitle")}
+            </Link>
+          )}
 
           {loading ? (
             <div className="flex justify-center py-12">

@@ -60,12 +60,10 @@ function makeField(): FormField {
 
 interface Props {
   data: BuilderData;
-  locale: string;
 }
 
-export function FormBuilder({ data, locale }: Props) {
+export function FormBuilder({ data }: Props) {
   const t = useTranslations("admin.intakeForms");
-  const base = locale === "fr" ? "/fr" : "";
 
   const [fields, setFields] = useState<FormField[]>(data.fields);
   const [formId, setFormId] = useState<string | null>(data.formId);
@@ -166,7 +164,7 @@ export function FormBuilder({ data, locale }: Props) {
           {/* Left: back + title */}
           <div className="flex flex-col gap-1">
             <Link
-              href={`${base}/admin/intake-forms`}
+              href={"/admin/intake-forms"}
               className="inline-flex items-center gap-1 text-xs text-slate-500 hover:text-slate-800 transition-colors"
             >
               <ChevronLeft className="h-3.5 w-3.5" />

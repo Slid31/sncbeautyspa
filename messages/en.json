@@ -268,6 +268,11 @@
       "reschedule": "Reschedule",
       "notes": "Notes",
       "intakeForm": "Intake Form",
+      "intakeCompleted": "Completed",
+      "intakePending": "Pending",
+      "intakeNA": "N/A",
+      "intakeLink": "Form link",
+      "intakeExpires": "Expires",
       "email": "Email",
       "phone": "Phone",
       "services": "Services",
@@ -638,6 +643,24 @@
       "required": "This field is required",
       "invalidEmail": "Please enter a valid email address"
     }
+  },
+  "intake": {
+    "title": "Health Intake Form",
+    "greeting": "Hello {name}, please complete your intake form before your appointment.",
+    "submit": "Submit Form",
+    "submitting": "Submitting…",
+    "successTitle": "Form Submitted!",
+    "successBody": "Thank you! Your responses have been recorded. See you at your appointment.",
+    "requiredField": "This field is required.",
+    "sectionPrefix": "Section",
+    "expired": "Link Expired",
+    "expiredBody": "This intake form link has expired. Please contact the salon if you still need to complete your form.",
+    "alreadyCompleted": "Already Submitted",
+    "alreadyCompletedBody": "You have already completed your intake form for this appointment. Thank you!",
+    "notFound": "Link Not Found",
+    "notFoundBody": "This link is invalid or has already been used. Please contact the salon for assistance.",
+    "noForms": "No Form Required",
+    "noFormsBody": "No intake form is required for your appointment. See you soon!"
   },
   "common": {
     "loading": "Loading...",

@@ -40,7 +40,7 @@ interface Props {
   locale: string;
 }
 
-export function SidebarNav({ role, locale }: Props) {
+export function SidebarNav({ role }: Props) {
   const t = useTranslations("admin.nav");
   const pathname = usePathname();
 
@@ -53,12 +53,11 @@ export function SidebarNav({ role, locale }: Props) {
     <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
       {items.map(({ key, href, icon: Icon }) => {
         const active = canonical === href || canonical.startsWith(href + "/");
-        const localizedHref = locale === "fr" ? `/fr${href}` : href;
 
         return (
           <Link
             key={href}
-            href={localizedHref}
+            href={href}
             className={cn(
               "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-100",
               active

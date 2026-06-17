@@ -3,12 +3,23 @@ import { Resend } from "resend";
 import { render } from "@react-email/render";
 import { ConfirmationEmail } from "@/emails/confirmation-email";
 import { CancellationEmail } from "@/emails/cancellation-email";
+import { IntakeReminderEmail } from "@/emails/intake-reminder-email";
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 
 function formatDate(date: Date, locale: string): string {
   return new Intl.DateTimeFormat(locale === "fr" ? "fr-CA" : "en-CA", {
     weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(date);
+}
+
+function formatShortDate(date: Date, locale: string): string {
+  return new Intl.DateTimeFormat(locale === "fr" ? "fr-CA" : "en-CA", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -52,11 +63,15 @@ export type ConfirmationEmailData = {
   clientFirstName: string;
   clientEmail: string;
   appointmentDate: Date;
-  /** Per-service name + price (e.g. "45.00") */
-  services: { name: string; price: string }[];
+  services: { name: string; duration: number; price: string }[];
   totalAmount: string;
   cancelToken: string;
+  intakeFormToken?: string;
   locale: string;
+  // Receipt
+  transactionId: string;
+  paymentDate: Date;
+  cardLast4?: string;
 };
 
 export async function sendConfirmationEmail(
@@ -69,16 +84,39 @@ export async function sendConfirmationEmail(
 
   const subject =
     locale === "fr"
-      ? "Votre rendez-vous est confirmé – SNC Beauty Salon & Spa"
-      : "Your appointment is confirmed – SNC Beauty Salon & Spa";
+      ? "Rendez-vous confirmé & reçu de paiement – SNC Beauty Salon & Spa"
+      : "Appointment confirmed & payment receipt – SNC Beauty Salon & Spa";
+
+  const intakeFormUrl = data.intakeFormToken
+    ? `${appUrl}${localePrefix}/intake/${data.intakeFormToken}`
+    : undefined;
+
+  // Salon contact info from env
+  const salonPhone = process.env.SALON_PHONE;
+  const salonEmail =
+    process.env.SALON_EMAIL ??
+    (process.env.RESEND_FROM?.match(/<(.+)>/)?.[1]) ??
+    "contact@sncbeautysalon.com";
+  const salonAddress =
+    process.env.SALON_ADDRESS ?? "Montreal, QC";
+
+  // Format transaction reference as "#TXN-XXXXXXXX"
+  const transactionRef = `#TXN-${data.transactionId.slice(0, 8).toUpperCase()}`;
 
   const html = await render(
     React.createElement(ConfirmationEmail, {
       clientFirstName: data.clientFirstName,
       appointmentDate: formatDate(data.appointmentDate, locale),
+      paymentDate: formatShortDate(data.paymentDate, locale),
       services: data.services,
       totalAmount: data.totalAmount,
       manageUrl,
+      intakeFormUrl,
+      transactionRef,
+      cardLast4: data.cardLast4,
+      salonPhone,
+      salonEmail,
+      salonAddress,
       locale,
     })
   );
@@ -117,6 +155,45 @@ export async function sendContactEmail(data: ContactEmailData): Promise<void> {
   `;
 
   await deliver(to, subject, html);
+}
+
+// ── Intake reminder email ──────────────────────────────────────────────────────
+
+export type IntakeReminderEmailData = {
+  clientFirstName: string;
+  clientEmail: string;
+  appointmentDate: Date;
+  services: { name: string; duration: number }[];
+  intakeFormToken: string;
+  intakeFormTokenExpiresAt: Date;
+  locale: string;
+};
+
+export async function sendIntakeReminderEmail(
+  data: IntakeReminderEmailData
+): Promise<void> {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  const locale = (data.locale === "fr" ? "fr" : "en") as "en" | "fr";
+  const localePrefix = locale === "fr" ? "/fr" : "";
+  const intakeFormUrl = `${appUrl}${localePrefix}/intake/${data.intakeFormToken}`;
+
+  const subject =
+    locale === "fr"
+      ? "Action requise : remplissez votre formulaire avant votre rendez-vous – SNC Beauty Salon & Spa"
+      : "Action required: complete your health form before your appointment – SNC Beauty Salon & Spa";
+
+  const html = await render(
+    React.createElement(IntakeReminderEmail, {
+      clientFirstName: data.clientFirstName,
+      appointmentDate: formatDate(data.appointmentDate, locale),
+      services: data.services,
+      intakeFormUrl,
+      expiresAt: formatShortDate(data.intakeFormTokenExpiresAt, locale),
+      locale,
+    })
+  );
+
+  await deliver(data.clientEmail, subject, html);
 }
 
 // ── Cancellation email ─────────────────────────────────────────────────────────

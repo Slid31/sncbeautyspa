@@ -7,9 +7,8 @@ import { ContactSection } from "./_components/contact-section";
 type Props = { params: Promise<{ locale: string }> };
 
 export default async function HomePage({ params }: Props) {
-  const [{ locale }, t] = await Promise.all([params, getTranslations("home")]);
+  const [, t] = await Promise.all([params, getTranslations("home")]);
   const ts = await getTranslations("services");
-  const base = locale === "fr" ? "/fr" : "";
 
   const featured = await prisma.service.findMany({
     where: { isActive: true },
@@ -60,14 +59,14 @@ export default async function HomePage({ params }: Props) {
           {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href={`${base}/book`}
+              href={`/book`}
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-pink-600 text-white font-semibold text-base hover:bg-pink-700 active:scale-95 transition-all shadow-lg shadow-pink-200"
             >
               {t("hero.cta")}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href={`${base}/services`}
+              href={`/services`}
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-slate-200 text-slate-700 font-semibold text-base hover:border-pink-300 hover:text-pink-700 transition-colors"
             >
               {t("hero.ctaSecondary")}
@@ -94,7 +93,7 @@ export default async function HomePage({ params }: Props) {
             {featured.map((svc) => (
               <Link
                 key={svc.id}
-                href={`${base}/services/${svc.id}`}
+                href={`/services/${svc.id}`}
                 className="group flex flex-col rounded-2xl border border-slate-200 bg-white hover:border-pink-200 hover:shadow-md transition-all overflow-hidden"
               >
                 {/* Image */}
@@ -150,7 +149,7 @@ export default async function HomePage({ params }: Props) {
         {/* View all link */}
         <div className="text-center mt-10">
           <Link
-            href={`${base}/services`}
+            href={`/services`}
             className="inline-flex items-center gap-2 text-pink-600 font-semibold hover:text-pink-800 transition-colors"
           >
             {t("viewAll")}

@@ -268,6 +268,11 @@
       "reschedule": "Reprogrammer",
       "notes": "Notes",
       "intakeForm": "Formulaire d'accueil",
+      "intakeCompleted": "Complété",
+      "intakePending": "En attente",
+      "intakeNA": "N/A",
+      "intakeLink": "Lien du formulaire",
+      "intakeExpires": "Expire le",
       "email": "Courriel",
       "phone": "Téléphone",
       "services": "Services",
@@ -638,6 +643,24 @@
       "required": "Ce champ est obligatoire",
       "invalidEmail": "Veuillez entrer une adresse courriel valide"
     }
+  },
+  "intake": {
+    "title": "Formulaire de santé",
+    "greeting": "Bonjour {name}, veuillez remplir votre formulaire de santé avant votre rendez-vous.",
+    "submit": "Soumettre le formulaire",
+    "submitting": "Envoi en cours…",
+    "successTitle": "Formulaire soumis !",
+    "successBody": "Merci ! Vos réponses ont été enregistrées. À bientôt pour votre rendez-vous.",
+    "requiredField": "Ce champ est obligatoire.",
+    "sectionPrefix": "Section",
+    "expired": "Lien expiré",
+    "expiredBody": "Ce lien de formulaire a expiré. Veuillez contacter le salon si vous devez encore remplir votre formulaire.",
+    "alreadyCompleted": "Déjà soumis",
+    "alreadyCompletedBody": "Vous avez déjà rempli votre formulaire pour ce rendez-vous. Merci !",
+    "notFound": "Lien introuvable",
+    "notFoundBody": "Ce lien est invalide ou a déjà été utilisé. Veuillez contacter le salon pour obtenir de l'aide.",
+    "noForms": "Aucun formulaire requis",
+    "noFormsBody": "Aucun formulaire de santé n'est requis pour votre rendez-vous. À bientôt !"
   },
   "common": {
     "loading": "Chargement...",

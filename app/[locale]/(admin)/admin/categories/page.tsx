@@ -7,7 +7,7 @@ export default async function AdminCategoriesPage() {
   await requireAuth();
 
   const raw = await prisma.serviceCategory.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: { order: "asc" },
     select: {
       id: true,
       name: true,

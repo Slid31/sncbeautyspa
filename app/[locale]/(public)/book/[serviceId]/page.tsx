@@ -5,7 +5,6 @@ type Props = {
 };
 
 export default async function BookServicePage({ params }: Props) {
-  const { locale, serviceId } = await params;
-  const base = locale === "fr" ? "/fr" : "";
-  redirect(`${base}/book?service=${serviceId}`);
+  const { serviceId } = await params;
+  redirect(`/book?service=${serviceId}`);
 }

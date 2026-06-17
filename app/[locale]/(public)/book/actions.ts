@@ -1,6 +1,7 @@
 "use server";
 
 import Stripe from "stripe";
+import { randomUUID } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendConfirmationEmail } from "@/lib/email";
 
@@ -47,14 +48,13 @@ export type BookingDraft = {
   client: ClientInfo;
   date: string; // "YYYY-MM-DD"
   timeSlot: string; // "HH:MM" 24-hour
-  intakeAnswers: Record<string, Record<string, unknown>>; // intakeFormId → { label: value }
 };
 
 // ── getCatalog ─────────────────────────────────────────────────────────────────
 
 export async function getCatalog(): Promise<CategoryWithServices[]> {
   const raw = await prisma.serviceCategory.findMany({
-    orderBy: { createdAt: "asc" },
+    orderBy: { order: "asc" },
     where: { services: { some: { isActive: true } } },
     select: {
       id: true,
@@ -191,48 +191,23 @@ export async function createCheckoutSession(
       },
     });
 
-    // Create PENDING appointment + services + intake response in a transaction
-    const appointment = await prisma.$transaction(async (tx) => {
-      const appt = await tx.appointment.create({
-        data: {
-          clientId: client.id,
-          date: appointmentDate,
-          status: "PENDING",
-          totalAmount,
-          paymentStatus: "UNPAID",
-          services: {
-            create: draft.services.map((s) => ({
-              serviceId: s.id,
-              priceSnapshot: parseFloat(s.price),
-            })),
-          },
+    // Create PENDING appointment + services
+    const appointment = await prisma.appointment.create({
+      data: {
+        clientId: client.id,
+        date: appointmentDate,
+        status: "PENDING",
+        totalAmount,
+        paymentStatus: "UNPAID",
+        locale,
+        services: {
+          create: draft.services.map((s) => ({
+            serviceId: s.id,
+            priceSnapshot: parseFloat(s.price),
+          })),
         },
-        select: { id: true, cancelToken: true },
-      });
-
-      // One intake response per appointment — deduplicate by intakeFormId (category-level)
-      const seenFormIds = new Set<string>();
-      const uniqueFormServices = draft.services.filter((s) => {
-        if (!s.intakeFormId || !draft.intakeAnswers[s.intakeFormId]) return false;
-        if (seenFormIds.has(s.intakeFormId)) return false;
-        seenFormIds.add(s.intakeFormId);
-        return true;
-      });
-      if (uniqueFormServices.length > 0) {
-        const combinedResponses: Record<string, unknown> = {};
-        for (const svc of uniqueFormServices) {
-          Object.assign(combinedResponses, draft.intakeAnswers[svc.intakeFormId!]);
-        }
-        await tx.intakeFormResponse.create({
-          data: {
-            appointmentId: appt.id,
-            formId: uniqueFormServices[0].intakeFormId!,
-            responses: JSON.parse(JSON.stringify(combinedResponses)),
-          },
-        });
-      }
-
-      return appt;
+      },
+      select: { id: true, cancelToken: true },
     });
 
     // Build Stripe line items
@@ -264,6 +239,39 @@ export async function createCheckoutSession(
     console.error("[checkout] createCheckoutSession error:", e);
     return { ok: false, error: "failed" };
   }
+}
+
+// ── generateIntakeToken ───────────────────────────────────────────────────────
+// Called after first confirmation. Checks if any booked service has an intake
+// form attached to its category; if so, generates a token + expiry and stores it.
+// Returns the token string if generated, null otherwise.
+
+export async function generateIntakeToken(appointmentId: string, appointmentDate: Date): Promise<string | null> {
+  const services = await prisma.appointmentService.findMany({
+    where: { appointmentId },
+    select: {
+      service: {
+        select: {
+          category: { select: { intakeForm: { select: { id: true } } } },
+        },
+      },
+    },
+  });
+
+  const hasIntakeForms = services.some((s) => s.service.category.intakeForm !== null);
+  if (!hasIntakeForms) return null;
+
+  const token = randomUUID();
+  const expiresAt = new Date(appointmentDate);
+  expiresAt.setDate(expiresAt.getDate() - 1);
+  expiresAt.setHours(23, 59, 59, 999);
+
+  await prisma.appointment.update({
+    where: { id: appointmentId },
+    data: { intakeFormToken: token, intakeFormTokenExpiresAt: expiresAt },
+  });
+
+  return token;
 }
 
 // ── confirmAppointmentBySession ───────────────────────────────────────────────
@@ -311,20 +319,24 @@ export async function confirmAppointmentBySession(
       },
     });
 
+    const paymentIntentId =
+      typeof session.payment_intent === "string" ? session.payment_intent : null;
+
     if (updated.count > 0) {
-      // First to confirm: create transaction + send email
-      await prisma.transaction.create({
-        data: {
-          appointmentId,
-          amount: (session.amount_total ?? 0) / 100,
-          currency: (session.currency ?? "usd").toUpperCase(),
-          stripeChargeId:
-            typeof session.payment_intent === "string"
-              ? session.payment_intent
-              : null,
-          status: "SUCCEEDED",
-        },
-      });
+      // First to confirm: create transaction
+      try {
+        await prisma.transaction.create({
+          data: {
+            appointmentId,
+            amount: (session.amount_total ?? 0) / 100,
+            currency: (session.currency ?? "usd").toUpperCase(),
+            ...(paymentIntentId ? { stripeChargeId: paymentIntentId } : {}),
+            status: "SUCCEEDED",
+          },
+        });
+      } catch {
+        // Transaction already created by webhook — safe to ignore
+      }
     }
 
     const appt = await prisma.appointment.findUnique({
@@ -336,26 +348,53 @@ export async function confirmAppointmentBySession(
         totalAmount: true,
         client: { select: { firstName: true, lastName: true, email: true } },
         services: {
-          select: { service: { select: { name: true } }, priceSnapshot: true },
+          select: {
+            priceSnapshot: true,
+            service: { select: { name: true, duration: true } },
+          },
         },
       },
     });
 
     if (!appt) return { ok: false, error: "not_found" };
 
-    // Send email on first confirm
+    // Send combined confirmation + receipt email on first confirm
     if (updated.count > 0) {
+      // Retrieve card last4 from Stripe (non-fatal)
+      let cardLast4: string | undefined;
+      if (paymentIntentId) {
+        try {
+          const pi = await stripe.paymentIntents.retrieve(paymentIntentId, {
+            expand: ["latest_charge"],
+          });
+          if (pi.latest_charge && typeof pi.latest_charge === "object") {
+            const charge = pi.latest_charge as import("stripe").default.Charge;
+            cardLast4 = charge.payment_method_details?.card?.last4 ?? undefined;
+          }
+        } catch {
+          // Non-fatal: email still sends without card info
+        }
+      }
+
+      const tx = await prisma.transaction.findUnique({ where: { appointmentId } });
+      const intakeToken = await generateIntakeToken(appointmentId, appt.date);
+
       await sendConfirmationEmail({
         clientFirstName: appt.client.firstName,
         clientEmail: appt.client.email,
         appointmentDate: appt.date,
         services: appt.services.map((s) => ({
           name: s.service.name,
+          duration: s.service.duration,
           price: s.priceSnapshot.toFixed(2),
         })),
         totalAmount: appt.totalAmount.toFixed(2),
         cancelToken: appt.cancelToken,
+        intakeFormToken: intakeToken ?? undefined,
         locale,
+        transactionId: tx?.id ?? appointmentId,
+        paymentDate: tx?.createdAt ?? new Date(),
+        cardLast4,
       });
     }
 

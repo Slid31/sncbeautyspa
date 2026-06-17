@@ -17,12 +17,10 @@ import type { CategoryListItem } from "../actions";
 
 interface Props {
   categories: CategoryListItem[];
-  locale: string;
 }
 
-export function CategoriesListClient({ categories, locale }: Props) {
+export function CategoriesListClient({ categories }: Props) {
   const t = useTranslations("admin.intakeForms");
-  const base = locale === "fr" ? "/fr" : "";
 
   return (
     <div className="px-8 py-6 space-y-6 max-w-4xl">
@@ -108,7 +106,7 @@ export function CategoriesListClient({ categories, locale }: Props) {
                       variant={cat.formId ? "outline" : "default"}
                       className="gap-1.5"
                     >
-                      <Link href={`${base}/admin/intake-forms/${cat.id}`}>
+                      <Link href={`/admin/intake-forms/${cat.id}`}>
                         {cat.formId ? (
                           <>
                             <Pencil className="h-3.5 w-3.5" />
