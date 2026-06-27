@@ -3,12 +3,98 @@
     "home": "Home",
     "services": "Services",
     "booking": "Book Appointment",
+    "policies": "Policies",
     "about": "About",
     "contact": "Contact",
     "login": "Login",
     "logout": "Logout",
     "dashboard": "Dashboard",
     "admin": "Admin"
+  },
+  "policies": {
+    "meta": {
+      "title": "Policies | SNC Beauty Salon & Spa",
+      "description": "Read our salon policies including reservations, cancellations, refunds, age requirements and more."
+    },
+    "title": "Policies & Procedures",
+    "subtitle": "Thank you for choosing us for your beauty needs. We are committed to providing top-quality service in a comfortable and enjoyable atmosphere. The following policies are intended to enhance everyone's experience with us.",
+    "reservations": {
+      "title": "Reservations policy",
+      "p1": "For all services: advanced reservation is recommended. A major credit card is required to hold reservation(s). If you need to cancel or reschedule, we require 24 to 48 hours' notice.",
+      "warning": "Appointments canceled, changed or rescheduled in less than 24 hours will be billed 100% of each service. Thank you for your understanding and cooperation."
+    },
+    "discounts": {
+      "title": "Discount policy",
+      "p1": "Please be advised that all discounted gift cards, gift certificates, package deals and spa week offers cannot be combined with any other offers in the salon & spa, discounts and promotions."
+    },
+    "giftCards": {
+      "title": "Gift cards policy",
+      "intro": "Gift cards are a wonderful way to give the gift of health, wellness and beauty to special people in your life.",
+      "b1": "Gift cards can be purchased at the salon or online. Gift cards are treated as cash — all lost or stolen gift cards are strictly non-refundable, not redeemable for cash and not replaceable.",
+      "b2": "Purchasing a gift certificate with another gift certificate is prohibited. Gift certificates can only be used for services or products. Our gift cards never expire for their cash value.",
+      "b3": "All discounted gift cards, gift certificates, package deals and spa week offers cannot be combined with any other services, offers, discounts or promotions in our salon & spa.",
+      "b4": "All sales are final.",
+      "highlight": "First time clients receive 20% off any spa services. Some restrictions may apply."
+    },
+    "gratuities": {
+      "title": "Gratuities",
+      "p1": "Gratuities are preferred in cash, Venmo, CashApp or Zelle."
+    },
+    "payment": {
+      "title": "Payment methods",
+      "p1": "We accept cash, Visa, MasterCard, American Express, Zelle or Venmo. We do not accept personal checks."
+    },
+    "age": {
+      "title": "Age requirement policy",
+      "b1": "Spa guests must be 18 years of age or older to receive treatments without approval or accompaniment of an adult.",
+      "b2": "16–17 years old: generally allowed to receive spa services such as facials or other services with parental consent.",
+      "b3": "Under 16: frequently required to have a parent or guardian present in the room during treatments."
+    },
+    "refunds": {
+      "title": "Refund policy",
+      "b1": "All service, series and gift card sales are final.",
+      "b2": "Unopened items may be returned within 14 days with proof of purchase as required by SNC Beauty Salon & Spa in order for any exchanges or refunds to be given.",
+      "b3": "Due to health regulations, we regret that we cannot accept opened or used returns of skin care products or other accessories."
+    },
+    "lateArrivals": {
+      "title": "Late arrivals policy",
+      "b1": "We will always try our best to accommodate you if you're running behind, stuck in traffic, etc.",
+      "b2": "Your tardiness can affect the remainder of our team's day by delaying them for clients who come in on time. For this reason, we have set a few general ground rules for such situations.",
+      "b3": "Clients will generally be allowed a 15-minute grace period."
+    },
+    "boundaries": {
+      "title": "Professional boundaries",
+      "p1": "All aspects of treatment can usually be modified to your taste: amount of light, type of music, and whether you choose to have a conversation or enjoy the treatment in silence.",
+      "b1": "Feel free to ask questions — your specialist will appreciate knowing your thoughts and clarifying any issues you may have."
+    },
+    "mobileSpa": {
+      "title": "Mobile spa service policies",
+      "p1": "As mobile spa estheticians we bring all necessary equipment such as portable beds/tables, linens, and hospital grade sanitizers. Clients are responsible for notifying the provider of any contagious illnesses, medications, or medical conditions prior to the treatment.",
+      "p2": "Mobile phones must be silenced or turned off. Voices must be kept to a minimum in relaxation and treatment areas. When booking an at-home or corporate event spa, the following guidelines and standards apply."
+    },
+    "spaParties": {
+      "title": "Spa parties — everyone is VIP",
+      "p1": "Who doesn't like to relax at a spa? Well, now you can experience both in the comfort of your own personal setting.",
+      "p2": "Spa parties are a great way to have fun with the people you love — whether it's for a birthday, baby shower, wedding shower, girl's or guy's night out, holiday party, sweet sixteen, bachelor or bachelorette party, or a kids/teens and adults celebration.",
+      "p3": "Our Mobile Spa is \"Making Wellness Popular,\" bringing massage, skin care and pedicure/manicure treatments directly to your home, office, hotel or event.",
+      "b1": "If you are planning a session or corporate event, let us know as early as possible."
+    },
+    "whatWeNeed": {
+      "title": "What we want to know",
+      "b1": "How many guests are you expecting?",
+      "b2": "What is the age of the kids attending?",
+      "b3": "What services are you looking for?",
+      "b4": "The location."
+    },
+    "lost": {
+      "title": "Lost / stolen items",
+      "p1": "SNC Beauty Salon & Spa is not responsible for any lost, stolen, or damaged items."
+    },
+    "sexual": {
+      "title": "Sexual interaction",
+      "warning": "Sexual interaction or discussion of any kind between the client and the specialist will never be appropriate."
+    },
+    "footer": "© SNC Beauty Salon & Spa — All rights reserved."
   },
   "home": {
     "hero": {

@@ -14,6 +14,7 @@ export async function PublicNavbar({ locale: _locale }: Props) {
   const navLinks = [
     { href: "/", label: t("home") },
     { href: "/services", label: t("services") },
+    { href: "/policies", label: t("policies") },
     { href: "/book", label: t("booking") },
   ];
 

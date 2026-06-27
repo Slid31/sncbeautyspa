@@ -3,12 +3,98 @@
     "home": "Accueil",
     "services": "Services",
     "booking": "Prendre rendez-vous",
+    "policies": "Politiques",
     "about": "À propos",
     "contact": "Contact",
     "login": "Connexion",
     "logout": "Déconnexion",
     "dashboard": "Tableau de bord",
     "admin": "Administration"
+  },
+  "policies": {
+    "meta": {
+      "title": "Politiques | SNC Beauty Salon & Spa",
+      "description": "Consultez nos politiques du salon : réservations, annulations, remboursements, âge requis et plus encore."
+    },
+    "title": "Politiques & procédures",
+    "subtitle": "Merci de nous avoir choisis pour vos besoins en beauté. Nous nous engageons à offrir des services de qualité supérieure dans une atmosphère confortable et agréable. Les politiques suivantes visent à améliorer l'expérience de tous.",
+    "reservations": {
+      "title": "Politique de réservation",
+      "p1": "Pour tous les services : la réservation à l'avance est recommandée. Une carte de crédit est requise pour confirmer la réservation. Toute annulation ou modification doit être faite 24 à 48 heures à l'avance.",
+      "warning": "Les rendez-vous annulés, modifiés ou reportés moins de 24 heures à l'avance seront facturés à 100 % du prix de chaque service. Merci de votre compréhension."
+    },
+    "discounts": {
+      "title": "Politique de rabais",
+      "p1": "Veuillez noter que toutes les cartes-cadeaux, certificats-cadeaux, forfaits et offres spéciales à prix réduit ne peuvent être combinés avec d'autres offres, rabais ou promotions du salon & spa."
+    },
+    "giftCards": {
+      "title": "Politique des cartes-cadeaux",
+      "intro": "Les cartes-cadeaux sont une merveilleuse façon d'offrir santé, bien-être et beauté aux personnes spéciales de votre vie.",
+      "b1": "Les cartes-cadeaux peuvent être achetées en salon ou en ligne. Elles sont traitées comme de l'argent comptant — les cartes perdues ou volées sont strictement non remboursables, non échangeables contre de l'argent et non remplaçables.",
+      "b2": "L'achat d'un certificat-cadeau avec un autre certificat-cadeau est interdit. Les certificats-cadeaux ne peuvent être utilisés que pour des services ou des produits. Nos cartes-cadeaux n'expirent jamais pour leur valeur en espèces.",
+      "b3": "Toutes les offres à prix réduit ne peuvent être combinées avec d'autres services, offres, rabais ou promotions du salon & spa.",
+      "b4": "Toutes les ventes sont finales.",
+      "highlight": "Les nouveaux clients bénéficient de 20 % de réduction sur tous les soins spa. Certaines restrictions s'appliquent."
+    },
+    "gratuities": {
+      "title": "Pourboires",
+      "p1": "Les pourboires sont préférés en espèces, Venmo, CashApp ou Zelle."
+    },
+    "payment": {
+      "title": "Modes de paiement",
+      "p1": "Nous acceptons les espèces, Visa, MasterCard, American Express, Zelle ou Venmo. Nous n'acceptons pas les chèques personnels."
+    },
+    "age": {
+      "title": "Politique d'âge requis",
+      "b1": "Les clients du spa doivent avoir 18 ans ou plus pour recevoir des soins sans l'approbation ou l'accompagnement d'un adulte.",
+      "b2": "16–17 ans : généralement autorisés à recevoir des soins spa tels que des soins du visage ou autres avec le consentement parental.",
+      "b3": "Moins de 16 ans : un parent ou tuteur doit généralement être présent dans la salle pendant les soins."
+    },
+    "refunds": {
+      "title": "Politique de remboursement",
+      "b1": "Toutes les ventes de services, forfaits et cartes-cadeaux sont finales.",
+      "b2": "Les articles non ouverts peuvent être retournés dans les 14 jours avec preuve d'achat, conformément aux exigences de SNC Beauty Salon & Spa pour tout échange ou remboursement.",
+      "b3": "Pour des raisons d'hygiène, nous regrettons de ne pas pouvoir accepter le retour de produits de soin ouverts ou utilisés, ni d'autres accessoires."
+    },
+    "lateArrivals": {
+      "title": "Politique de retard",
+      "b1": "Nous ferons toujours de notre mieux pour vous accommoder en cas de retard, embouteillages, etc.",
+      "b2": "Votre retard peut affecter le reste de la journée de notre équipe en les retardant pour leurs clients à l'heure. Pour cette raison, nous avons établi quelques règles générales pour ces situations.",
+      "b3": "Les clients bénéficient généralement d'une période de grâce de 15 minutes."
+    },
+    "boundaries": {
+      "title": "Limites professionnelles",
+      "p1": "Tous les aspects du soin peuvent généralement être adaptés à vos goûts : quantité de lumière, type de musique, et si vous souhaitez converser ou profiter du soin en silence.",
+      "b1": "N'hésitez pas à poser des questions — votre spécialiste appréciera connaître vos souhaits et clarifier tout problème que vous pourriez avoir."
+    },
+    "mobileSpa": {
+      "title": "Politiques des services spa mobiles",
+      "p1": "En tant qu'esthéticiennes de spa mobile, nous apportons tout l'équipement nécessaire : lits/tables portables, draps et désinfectants de qualité hospitalière. Les clients sont responsables d'informer le prestataire de toute maladie contagieuse, médicament ou condition médicale avant le soin.",
+      "p2": "Les téléphones mobiles doivent être mis en mode silencieux ou éteints. Les voix doivent être gardées au minimum dans les zones de relaxation et de traitement. Lors de la réservation d'un spa à domicile ou d'un événement d'entreprise, les directives et normes suivantes s'appliquent."
+    },
+    "spaParties": {
+      "title": "Soirées spa — tout le monde est VIP",
+      "p1": "Qui n'aime pas se détendre dans un spa ? Maintenant, vous pouvez vivre cette expérience dans le confort de votre propre cadre personnel.",
+      "p2": "Les soirées spa sont une excellente façon de s'amuser avec les personnes que vous aimez — que ce soit pour un anniversaire, un baby shower, une fête de mariage, une soirée entre filles ou garçons, une fête de fin d'année, un sweet sixteen, une soirée enterrement de vie de garçon ou de jeune fille, ou une célébration pour enfants/ados et adultes.",
+      "p3": "Notre Spa Mobile « Rend le Bien-être Populaire », en apportant massages, soins de la peau et manucure/pédicure directement à votre domicile, bureau, hôtel ou événement.",
+      "b1": "Si vous planifiez une session ou un événement d'entreprise, informez-nous le plus tôt possible."
+    },
+    "whatWeNeed": {
+      "title": "Ce que nous voulons savoir",
+      "b1": "Combien d'invités attendez-vous ?",
+      "b2": "Quel est l'âge des enfants présents ?",
+      "b3": "Quels services recherchez-vous ?",
+      "b4": "Le lieu."
+    },
+    "lost": {
+      "title": "Objets perdus / volés",
+      "p1": "SNC Beauty Salon & Spa n'est pas responsable des objets perdus, volés ou endommagés."
+    },
+    "sexual": {
+      "title": "Interaction sexuelle",
+      "warning": "Toute interaction ou discussion à caractère sexuel entre le client et le spécialiste ne sera jamais appropriée."
+    },
+    "footer": "© SNC Beauty Salon & Spa — Tous droits réservés."
   },
   "home": {
     "hero": {
