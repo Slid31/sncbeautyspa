@@ -65,7 +65,7 @@
     "boundaries": {
       "title": "Limites professionnelles",
       "p1": "Tous les aspects du soin peuvent généralement être adaptés à vos goûts : quantité de lumière, type de musique, et si vous souhaitez converser ou profiter du soin en silence.",
-      "b1": "N'hésitez pas à poser des questions — votre spécialiste appréciera connaître vos souhaits et clarifier tout problème que vous pourriez avoir."
+      "b1": "N'hésitez pas à poser des questions votre spécialiste appréciera connaître vos souhaits et clarifier tout problème que vous pourriez avoir."
     },
     "mobileSpa": {
       "title": "Politiques des services spa mobiles",
@@ -75,7 +75,7 @@
     "spaParties": {
       "title": "Soirées spa — tout le monde est VIP",
       "p1": "Qui n'aime pas se détendre dans un spa ? Maintenant, vous pouvez vivre cette expérience dans le confort de votre propre cadre personnel.",
-      "p2": "Les soirées spa sont une excellente façon de s'amuser avec les personnes que vous aimez — que ce soit pour un anniversaire, un baby shower, une fête de mariage, une soirée entre filles ou garçons, une fête de fin d'année, un sweet sixteen, une soirée enterrement de vie de garçon ou de jeune fille, ou une célébration pour enfants/ados et adultes.",
+      "p2": "Les soirées spa sont une excellente façon de s'amuser avec les personnes que vous aimez que ce soit pour un anniversaire, un baby shower, une fête de mariage, une soirée entre filles ou garçons, une fête de fin d'année, un sweet sixteen, une soirée enterrement de vie de garçon ou de jeune fille, ou une célébration pour enfants/ados et adultes.",
       "p3": "Notre Spa Mobile « Rend le Bien-être Populaire », en apportant massages, soins de la peau et manucure/pédicure directement à votre domicile, bureau, hôtel ou événement.",
       "b1": "Si vous planifiez une session ou un événement d'entreprise, informez-nous le plus tôt possible."
     },
@@ -88,7 +88,8 @@
     },
     "lost": {
       "title": "Objets perdus / volés",
-      "p1": "SNC Beauty Salon & Spa n'est pas responsable des objets perdus, volés ou endommagés."
+      "p1": "SNC Beauty Salon & Spa n'est pas responsable des objets perdus, volés ou endommagés.",
+      "p2": "Veuillez vous assurer de garder vos objets de valeur avec vous en tout temps."
     },
     "sexual": {
       "title": "Interaction sexuelle",

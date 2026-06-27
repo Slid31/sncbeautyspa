@@ -164,6 +164,7 @@ export default async function PoliciesPage() {
         {/* Lost / Stolen */}
         <Section icon="ti-shield-x" title={t("lost.title")}>
           <P>{t("lost.p1")}</P>
+          <P>{t("lost.p2")}</P>
         </Section>
 
         {/* Sexual Interaction */}

@@ -65,7 +65,7 @@
     "boundaries": {
       "title": "Professional boundaries",
       "p1": "All aspects of treatment can usually be modified to your taste: amount of light, type of music, and whether you choose to have a conversation or enjoy the treatment in silence.",
-      "b1": "Feel free to ask questions — your specialist will appreciate knowing your thoughts and clarifying any issues you may have."
+      "b1": "Feel free to ask questions your specialist will appreciate knowing your thoughts and clarifying any issues you may have."
     },
     "mobileSpa": {
       "title": "Mobile spa service policies",
@@ -75,7 +75,7 @@
     "spaParties": {
       "title": "Spa parties — everyone is VIP",
       "p1": "Who doesn't like to relax at a spa? Well, now you can experience both in the comfort of your own personal setting.",
-      "p2": "Spa parties are a great way to have fun with the people you love — whether it's for a birthday, baby shower, wedding shower, girl's or guy's night out, holiday party, sweet sixteen, bachelor or bachelorette party, or a kids/teens and adults celebration.",
+      "p2": "Spa parties are a great way to have fun with the people you love whether it's for a birthday, baby shower, wedding shower, girl's or guy's night out, holiday party, sweet sixteen, bachelor or bachelorette party, or a kids/teens and adults celebration.",
       "p3": "Our Mobile Spa is \"Making Wellness Popular,\" bringing massage, skin care and pedicure/manicure treatments directly to your home, office, hotel or event.",
       "b1": "If you are planning a session or corporate event, let us know as early as possible."
     },
@@ -88,7 +88,8 @@
     },
     "lost": {
       "title": "Lost / stolen items",
-      "p1": "SNC Beauty Salon & Spa is not responsible for any lost, stolen, or damaged items."
+      "p1": "SNC Beauty Salon & Spa is not responsible for any lost, stolen, or damaged items.",
+      "p2": "Please make sure to keep all valuables with you at all times."
     },
     "sexual": {
       "title": "Sexual interaction",
