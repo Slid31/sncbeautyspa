@@ -174,9 +174,9 @@ export default async function PoliciesPage() {
 
       </div>
 
-      <p className="mt-12 text-center text-xs text-slate-400">
+      {/* <p className="mt-12 text-center text-xs text-slate-400">
         {t("footer")}
-      </p>
+      </p> */}
     </div>
   );
 }
