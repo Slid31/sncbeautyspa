@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import type { Resolver } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { Mail, Phone, MapPin, CheckCircle2, Send } from "lucide-react";
+import { Mail, Phone, CheckCircle2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -56,9 +56,9 @@ export function ContactSection() {
         <div className="grid gap-10 lg:grid-cols-5 items-start mb-10">
           {/* ── Left: info cards ── */}
           <div className="lg:col-span-2 space-y-4">
-            <InfoCard icon={Phone} label={t("phone")} value="+1 (514) 000-0000" />
-            <InfoCard icon={Mail}  label={t("email")} value="contact@sncbeautysalon.com" />
-            <InfoCard icon={MapPin} label={t("address")} value={t("addressValue")} />
+            <InfoCard icon={Phone} label={t("phone")} value="+1 347-313-6461" />
+            <InfoCard icon={Mail}  label={t("email")} value="sncbeauty1@gmail.com" />
+            {/* <InfoCard icon={MapPin} label={t("address")} value={t("addressValue")} /> */}
 
             {/* Hours */}
             <div className="rounded-2xl border border-pink-100 bg-white p-5 shadow-sm">
@@ -153,7 +153,7 @@ export function ContactSection() {
           </div>
         </div>
         {/* ── Map ── */}
-        <div className="rounded-2xl overflow-hidden border border-pink-100 shadow-sm">
+        {/* <div className="rounded-2xl overflow-hidden border border-pink-100 shadow-sm">
           <iframe
             title={t("mapTitle")}
             src="https://www.openstreetmap.org/export/embed.html?bbox=-73.6273%2C45.4773%2C-73.5273%2C45.5373&layer=mapnik&marker=45.5073%2C-73.5773"
@@ -163,7 +163,7 @@ export function ContactSection() {
             style={{ display: "block", border: 0 }}
             allowFullScreen
           />
-        </div>
+        </div> */}
 
       </div>
     </section>
