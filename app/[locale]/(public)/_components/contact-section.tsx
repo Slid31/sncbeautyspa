@@ -56,7 +56,7 @@ export function ContactSection() {
         <div className="grid gap-10 lg:grid-cols-5 items-start mb-10">
           {/* ── Left: info cards ── */}
           <div className="lg:col-span-2 space-y-4">
-            <InfoCard icon={Phone} label={t("phone")} value="+1 347-313-6461" />
+            <InfoCard icon={Phone} label={t("phone")} value="+1 347-313-6461" href="https://wa.me/13473136461" />
             <InfoCard icon={Mail}  label={t("email")} value="sncbeauty1@gmail.com" />
             {/* <InfoCard icon={MapPin} label={t("address")} value={t("addressValue")} /> */}
 
@@ -176,12 +176,14 @@ function InfoCard({
   icon: Icon,
   label,
   value,
+  href,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   value: string;
+  href?: string;
 }) {
-  return (
+  const inner = (
     <div className="flex items-start gap-4 rounded-2xl border border-pink-100 bg-white p-5 shadow-sm">
       <div className="mt-0.5 h-9 w-9 shrink-0 rounded-xl bg-pink-50 flex items-center justify-center">
         <Icon className="h-4 w-4 text-pink-600" />
@@ -194,6 +196,10 @@ function InfoCard({
       </div>
     </div>
   );
+  if (href) {
+    return <a href={href} target="_blank" rel="noopener noreferrer">{inner}</a>;
+  }
+  return inner;
 }
 
 function HourRow({
