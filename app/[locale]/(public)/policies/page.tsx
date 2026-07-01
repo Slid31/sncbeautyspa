@@ -16,7 +16,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <div className="border-b border-slate-100 pb-8 last:border-0 last:pb-0">
+    <div className="border-b border-slate-100 pb-5 last:border-0 last:pb-0">
       <div className="flex items-center gap-2 mb-4">
         <i className={`ti ${icon} text-pink-500`} style={{ fontSize: 16 }} aria-hidden="true" />
         <h2 className="text-xs font-semibold tracking-widest uppercase text-pink-500">
@@ -30,7 +30,7 @@ function Section({
 
 function P({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-sm sm:text-base text-slate-600 leading-relaxed">{children}</p>
+    <p className="text-sm sm:text-base text-slate-600 leading-relaxed text-justify">{children}</p>
   );
 }
 
@@ -38,7 +38,7 @@ function Bullet({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex gap-2.5 text-sm sm:text-base text-slate-600 leading-relaxed">
       <span className="text-pink-400 mt-1 shrink-0">•</span>
-      <span>{children}</span>
+      <span className="text-justify">{children}</span>
     </div>
   );
 }
@@ -79,7 +79,7 @@ export default async function PoliciesPage() {
         </p>
       </div>
 
-      <div className="space-y-8 sm:space-y-10">
+      <div className="space-y-5 sm:space-y-6">
 
         {/* Reservations */}
         <Section icon="ti-calendar" title={t("reservations.title")}>
