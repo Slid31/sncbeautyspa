@@ -143,6 +143,9 @@ export async function sendContactEmail(data: ContactEmailData): Promise<void> {
 
   const html = `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px">
+      <div style="text-align:center;margin-bottom:24px">
+        <img src="https://www.sncbeautyfashion.com/trans_logo.png" alt="SNC Beauty Salon & Spa" width="80" height="80" style="display:inline-block" />
+      </div>
       <h2 style="color:#db2777;margin-bottom:24px">New contact message</h2>
       <table style="width:100%;border-collapse:collapse">
         <tr><td style="padding:8px 0;color:#64748b;width:100px"><b>Name</b></td><td style="padding:8px 0;color:#0f172a">${data.name}</td></tr>

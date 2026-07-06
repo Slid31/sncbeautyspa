@@ -12,6 +12,7 @@ import {
   Button,
   Hr,
   Preview,
+  Img,
 } from "@react-email/components";
 
 export type IntakeReminderEmailProps = {
@@ -83,7 +84,13 @@ export function IntakeReminderEmail({
 
           {/* ── HEADER ── */}
           <Section style={s.header}>
-            <Text style={s.brandName}>✂ SNC Beauty Salon &amp; Spa</Text>
+            <Img
+              src="https://www.sncbeautyfashion.com/trans_logo.png"
+              alt="SNC Beauty Salon & Spa"
+              width={80}
+              height={80}
+              style={{ margin: "0 auto 8px" }}
+            />
             <Text style={s.badge}>{c.badge}</Text>
             <Heading style={s.h1}>{c.heading}</Heading>
             <Text style={s.tagline}>{c.tagline}</Text>

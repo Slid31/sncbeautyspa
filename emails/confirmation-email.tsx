@@ -13,6 +13,7 @@ import {
   Hr,
   Preview,
   Link,
+  Img,
 } from "@react-email/components";
 
 export type ConfirmationEmailProps = {
@@ -127,7 +128,13 @@ export function ConfirmationEmail({
 
           {/* ── HEADER ── */}
           <Section style={s.header}>
-            <Text style={s.brandName}>✂ SNC Beauty Salon &amp; Spa</Text>
+            <Img
+              src="https://www.sncbeautyfashion.com/trans_logo.png"
+              alt="SNC Beauty Salon & Spa"
+              width={80}
+              height={80}
+              style={{ margin: "0 auto 8px" }}
+            />
             <Heading style={s.h1}>{c.title}</Heading>
           </Section>
 
