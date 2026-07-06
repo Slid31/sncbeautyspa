@@ -1,6 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Scissors } from "lucide-react";
 import { PublicLanguageSwitcher } from "./language-switcher";
 import { MobileMenu } from "./mobile-menu";
 
@@ -20,14 +20,17 @@ export async function PublicNavbar({ locale: _locale }: Props) {
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-24 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 font-semibold text-slate-900 hover:text-pink-600 transition-colors shrink-0"
-        >
-          <Scissors className="h-5 w-5 text-pink-500" />
-          <span className="text-base sm:text-lg">SNC Beauty Salon</span>
+        <Link href="/" className="shrink-0">
+          <Image
+            src="/trans_logo.png"
+            alt="SNC Beauty Salon & Spa"
+            width={200}
+            height={200}
+            className="h-20 w-20 object-contain"
+            priority
+          />
         </Link>
 
         {/* Nav links — hidden on mobile, shown md+ */}

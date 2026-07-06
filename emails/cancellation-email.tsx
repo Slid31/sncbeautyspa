@@ -10,6 +10,7 @@ import {
   Button,
   Hr,
   Preview,
+  Img,
 } from "@react-email/components";
 
 export type CancellationEmailProps = {
@@ -71,6 +72,13 @@ export function CancellationEmail({
         <Container style={s.container}>
           {/* ── Muted rose header ── */}
           <Section style={s.header}>
+            <Img
+              src="https://www.sncbeautyfashion.com/trans_logo.png"
+              alt="SNC Beauty Salon & Spa"
+              width={80}
+              height={80}
+              style={{ margin: "0 auto 8px" }}
+            />
             <Heading style={s.h1}>{c.heading}</Heading>
             <Text style={s.tagline}>{c.tagline}</Text>
           </Section>

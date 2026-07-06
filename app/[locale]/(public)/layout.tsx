@@ -14,8 +14,7 @@ export default async function PublicLayout({ children, params }: Props) {
       <main className="flex-1">{children}</main>
       <footer className="border-t border-slate-100 bg-slate-50 py-10">
         <div className="max-w-6xl mx-auto px-6 text-center text-sm text-slate-500">
-          <p className="font-medium text-slate-700 mb-1">SNC Beauty Salon &amp; Spa</p>
-          <p>© {new Date().getFullYear()} SNC Beauty Salon. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} SNC Beauty Salon &amp; Spa. All rights reserved.</p>
         </div>
       </footer>
     </div>
