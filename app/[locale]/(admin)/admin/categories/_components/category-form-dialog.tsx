@@ -26,6 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { createCategory, updateCategory } from "../actions";
 import type { CategoryRow } from "../actions";
 
@@ -143,15 +144,11 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
                 <FormItem>
                   <FormLabel>{t("form.image")}</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={t("form.imagePlaceholder")}
-                      type="url"
-                      {...field}
+                    <ImageUpload
+                      value={field.value ?? ""}
+                      onChange={field.onChange}
                     />
                   </FormControl>
-                  <FormDescription className="text-xs text-slate-500">
-                    {t("form.imageHint")}
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

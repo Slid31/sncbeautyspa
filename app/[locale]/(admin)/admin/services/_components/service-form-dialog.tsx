@@ -35,6 +35,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { ImageUpload } from "@/components/ui/image-upload";
 import { createService, updateService } from "../actions";
 import type { ServiceRow, CategoryOption } from "../actions";
 
@@ -287,7 +288,7 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
                 )}
               />
 
-              {/* Image URL */}
+              {/* Image Upload */}
               <FormField
                 control={form.control}
                 name="image"
@@ -295,15 +296,11 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
                   <FormItem>
                     <FormLabel>{t("form.image")}</FormLabel>
                     <FormControl>
-                      <Input
-                        type="url"
-                        placeholder={t("form.imagePlaceholder")}
-                        {...field}
+                      <ImageUpload
+                        value={field.value ?? ""}
+                        onChange={field.onChange}
                       />
                     </FormControl>
-                    <FormDescription className="text-xs text-slate-500">
-                      {t("form.imageHint")}
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

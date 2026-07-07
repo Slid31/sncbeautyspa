@@ -1,4 +1,4 @@
-import { Sparkles } from "lucide-react";
+import Image from "next/image";
 import { LoginForm } from "./_components/login-form";
 
 export const metadata = {
@@ -36,15 +36,14 @@ export default function LoginPage() {
         <div className="hidden md:flex w-72 shrink-0 bg-slate-200 items-center justify-center p-8">
           <div className="bg-white rounded-2xl shadow p-10 flex flex-col items-center text-center w-full">
             {/* Logo */}
-            <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center mb-5 shadow-md">
-              <Sparkles className="h-8 w-8 text-white" />
-            </div>
-
-            <p className="text-base font-bold text-gray-900 leading-snug">
-              SNC Beauty
-            </p>
-            <p className="text-sm font-semibold text-gray-700">Salon &amp; Spa</p>
-            <p className="mt-2 text-xs text-gray-400">Staff portal</p>
+            <Image
+              src="/trans_logo.png"
+              alt="SNC Beauty Salon & Spa"
+              width={100}
+              height={100}
+              className="mb-3 object-contain"
+            />
+            
           </div>
         </div>
 

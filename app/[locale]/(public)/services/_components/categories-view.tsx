@@ -75,12 +75,12 @@ export function CategoriesView({ categories }: Props) {
               aria-expanded={isOpen}
             >
               {/* Category image */}
-              <div className="h-14 w-14 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0">
+              <div className="h-20 w-20 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0">
                 {cat.image ? (
                   <img
                     src={cat.image}
                     alt={cat.name}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                   />
                 ) : (
                   <ImageOff className="h-5 w-5 text-slate-300" />
