@@ -33,8 +33,7 @@
       "b1": "Les cartes-cadeaux peuvent être achetées en salon ou en ligne. Elles sont traitées comme de l'argent comptant — les cartes perdues ou volées sont strictement non remboursables, non échangeables contre de l'argent et non remplaçables.",
       "b2": "L'achat d'un certificat-cadeau avec un autre certificat-cadeau est interdit. Les certificats-cadeaux ne peuvent être utilisés que pour des services ou des produits. Nos cartes-cadeaux n'expirent jamais pour leur valeur en espèces.",
       "b3": "Toutes les offres à prix réduit ne peuvent être combinées avec d'autres services, offres, rabais ou promotions du salon & spa.",
-      "b4": "Toutes les ventes sont finales.",
-      "highlight": "Les nouveaux clients bénéficient de 20 % de réduction sur tous les soins spa. Certaines restrictions s'appliquent."
+      "b4": "Toutes les ventes sont finales."
     },
     "gratuities": {
       "title": "Pourboires",
@@ -42,7 +41,7 @@
     },
     "payment": {
       "title": "Modes de paiement",
-      "p1": "Nous acceptons les espèces, Visa, MasterCard, American Express, Zelle ou Venmo. Nous n'acceptons pas les chèques personnels."
+      "p1": "Nous acceptons les cartes de débit, crédit, Visa, American Express, Discover. Nous n'acceptons pas les chèques personnels."
     },
     "age": {
       "title": "Politique d'âge requis",
@@ -123,7 +122,7 @@
       "address": "Adresse",
       "addressValue": "123 rue Beauté, Montréal, QC",
       "hours": "Heures d'ouverture",
-      "monFri": "Lun – Ven",
+      "monFri": "Lun - Ven",
       "saturday": "Samedi",
       "sunday": "Dimanche",
       "closed": "Fermé",

@@ -33,8 +33,7 @@
       "b1": "Gift cards can be purchased at the salon or online. Gift cards are treated as cash — all lost or stolen gift cards are strictly non-refundable, not redeemable for cash and not replaceable.",
       "b2": "Purchasing a gift certificate with another gift certificate is prohibited. Gift certificates can only be used for services or products. Our gift cards never expire for their cash value.",
       "b3": "All discounted gift cards, gift certificates, package deals and spa week offers cannot be combined with any other services, offers, discounts or promotions in our salon & spa.",
-      "b4": "All sales are final.",
-      "highlight": "First time clients receive 20% off any spa services. Some restrictions may apply."
+      "b4": "All sales are final."
     },
     "gratuities": {
       "title": "Gratuities",
@@ -42,7 +41,7 @@
     },
     "payment": {
       "title": "Payment methods",
-      "p1": "We accept cash, Visa, MasterCard, American Express, Zelle or Venmo. We do not accept personal checks."
+      "p1": "We accept Debit, Credit, Visa, American Express, Discover. We don't accept personal checks."
     },
     "age": {
       "title": "Age requirement policy",
@@ -123,7 +122,7 @@
       "address": "Address",
       "addressValue": "123 Beauty Street, Montreal, QC",
       "hours": "Opening Hours",
-      "monFri": "Mon – Fri",
+      "monFri": "Mon - Fri",
       "saturday": "Saturday",
       "sunday": "Sunday",
       "closed": "Closed",

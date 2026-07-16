@@ -99,7 +99,6 @@ export default async function PoliciesPage() {
           <Bullet>{t("giftCards.b2")}</Bullet>
           <Bullet>{t("giftCards.b3")}</Bullet>
           <Bullet>{t("giftCards.b4")}</Bullet>
-          <Highlight>{t("giftCards.highlight")}</Highlight>
         </Section>
 
         {/* Gratuities */}
