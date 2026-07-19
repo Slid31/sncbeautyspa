@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
+import type { Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
@@ -61,7 +62,7 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
   type FormValues = z.infer<typeof schema>;
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema) as Resolver<FormValues>,
     defaultValues: { name: "", description: "", image: "", order: 0 },
   });
 
