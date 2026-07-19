@@ -53,6 +53,7 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
         image: z
           .union([z.string().url(t("form.imageInvalid")), z.literal("")])
           .optional(),
+        order: z.coerce.number().int().min(0).default(0),
       }),
     [t]
   );
@@ -61,7 +62,7 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", description: "", image: "" },
+    defaultValues: { name: "", description: "", image: "", order: 0 },
   });
 
   // Sync form values when dialog opens or edited category changes
@@ -71,6 +72,7 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
         name: category?.name ?? "",
         description: category?.description ?? "",
         image: category?.image ?? "",
+        order: category?.order ?? 0,
       });
     }
   }, [open, category, form]);
@@ -113,6 +115,29 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
                   <FormControl>
                     <Input placeholder={t("form.namePlaceholder")} {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="order"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Ordre d'affichage</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      min={0}
+                      placeholder="0"
+                      {...field}
+                      className="w-28"
+                    />
+                  </FormControl>
+                  <FormDescription className="text-xs">
+                    Les catégories sont affichées du plus petit au plus grand numéro.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

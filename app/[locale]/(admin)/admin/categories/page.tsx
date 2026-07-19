@@ -13,6 +13,7 @@ export default async function AdminCategoriesPage() {
       name: true,
       description: true,
       image: true,
+      order: true,
       createdAt: true,
       _count: { select: { services: true } },
     },
@@ -23,6 +24,7 @@ export default async function AdminCategoriesPage() {
     name: cat.name,
     description: cat.description,
     image: cat.image,
+    order: cat.order,
     createdAt: cat.createdAt.toISOString(),
     serviceCount: cat._count.services,
   }));
