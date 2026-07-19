@@ -17,6 +17,7 @@ export type ServiceRow = {
   categoryName: string;
   image: string | null;
   isActive: boolean;
+  order: number;
   createdAt: string;
   appointmentCount: number;
 };
@@ -39,6 +40,7 @@ const serviceSchema = z.object({
     .optional()
     .transform((v) => (v === "" ? undefined : v)),
   isActive: z.boolean().default(true),
+  order: z.coerce.number().int().min(0).default(0),
 });
 
 export type ServiceFormData = z.input<typeof serviceSchema>;
@@ -69,7 +71,7 @@ export async function createService(data: ServiceFormData): Promise<ActionResult
   const parsed = serviceSchema.safeParse(data);
   if (!parsed.success) return { ok: false, error: "invalid_data" } satisfies Fail;
 
-  const { name, description, price, duration, categoryId, image, isActive } =
+  const { name, description, price, duration, categoryId, image, isActive, order } =
     parsed.data;
 
   await prisma.service.create({
@@ -81,6 +83,7 @@ export async function createService(data: ServiceFormData): Promise<ActionResult
       categoryId,
       image: image ?? null,
       isActive,
+      order,
     },
   });
 
@@ -95,7 +98,7 @@ export async function updateService(
   const parsed = serviceSchema.safeParse(data);
   if (!parsed.success) return { ok: false, error: "invalid_data" } satisfies Fail;
 
-  const { name, description, price, duration, categoryId, image, isActive } =
+  const { name, description, price, duration, categoryId, image, isActive, order } =
     parsed.data;
 
   await prisma.service.update({
@@ -108,10 +111,23 @@ export async function updateService(
       categoryId,
       image: image ?? null,
       isActive,
+      order,
     },
   });
 
   revalidate();
+  return { ok: true };
+}
+
+export async function reorderServices(orderedIds: string[]): Promise<ActionResult> {
+  await prisma.$transaction(
+    orderedIds.map((id, index) =>
+      prisma.service.update({ where: { id }, data: { order: index } })
+    )
+  );
+  revalidate();
+  revalidatePath("/en/services");
+  revalidatePath("/fr/services");
   return { ok: true };
 }
 

@@ -49,6 +49,7 @@ const _baseSchema = z.object({
   categoryId: z.string().min(1),
   image: z.union([z.string().url(), z.literal("")]).optional(),
   isActive: z.boolean().default(true),
+  order: z.coerce.number().int().min(0).default(0),
 });
 
 type FormValues = z.infer<typeof _baseSchema>;
@@ -91,6 +92,7 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
           .union([z.string().url(t("form.imageInvalid")), z.literal("")])
           .optional(),
         isActive: z.boolean().default(true),
+        order: z.coerce.number().int().min(0).default(0),
       }),
     [t]
   );
@@ -108,6 +110,7 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
       categoryId: "",
       image: "",
       isActive: true,
+      order: 0,
     },
   });
 
@@ -122,6 +125,7 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
         categoryId: service?.categoryId ?? "",
         image: service?.image ?? "",
         isActive: service?.isActive ?? true,
+        order: service?.order ?? 0,
       });
     }
   }, [open, service, form]);
@@ -301,6 +305,30 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
                         onChange={field.onChange}
                       />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              {/* Order */}
+              <FormField
+                control={form.control}
+                name="order"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Ordre d'affichage</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        min={0}
+                        placeholder="0"
+                        {...field}
+                        className="w-28"
+                      />
+                    </FormControl>
+                    <FormDescription className="text-xs">
+                      Affiché du plus petit au plus grand numéro dans sa catégorie.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}

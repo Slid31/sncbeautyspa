@@ -8,11 +8,11 @@ export default async function AdminServicesPage() {
 
   const [rawCategories, rawServices] = await Promise.all([
     prisma.serviceCategory.findMany({
-      orderBy: { name: "asc" },
+      orderBy: { order: "asc" },
       select: { id: true, name: true },
     }),
     prisma.service.findMany({
-      orderBy: [{ categoryId: "asc" }, { name: "asc" }],
+      orderBy: [{ categoryId: "asc" }, { order: "asc" }, { name: "asc" }],
       select: {
         id: true,
         name: true,
@@ -22,6 +22,7 @@ export default async function AdminServicesPage() {
         categoryId: true,
         image: true,
         isActive: true,
+        order: true,
         createdAt: true,
         category: { select: { name: true } },
         _count: { select: { appointmentServices: true } },
@@ -44,6 +45,7 @@ export default async function AdminServicesPage() {
     categoryName: s.category.name,
     image: s.image,
     isActive: s.isActive,
+    order: s.order,
     createdAt: s.createdAt.toISOString(),
     appointmentCount: s._count.appointmentServices,
   }));

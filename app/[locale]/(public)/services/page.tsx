@@ -16,7 +16,7 @@ export default async function ServicesPage({ params }: Props) {
       image: true,
       services: {
         where: { isActive: true },
-        orderBy: { name: "asc" },
+        orderBy: [{ order: "asc" }, { name: "asc" }],
         select: {
           id: true,
           name: true,
