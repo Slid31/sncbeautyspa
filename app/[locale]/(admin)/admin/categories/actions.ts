@@ -6,7 +6,7 @@ import { z } from "zod";
 
 const categorySchema = z.object({
   name: z.string().min(1).max(100),
-  description: z.string().max(500).optional(),
+  description: z.string().max(1000).optional(),
   image: z
     .union([z.string().url(), z.literal("")])
     .optional()

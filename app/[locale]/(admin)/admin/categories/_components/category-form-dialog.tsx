@@ -49,7 +49,7 @@ export function CategoryFormDialog({ open, onClose, category }: Props) {
           .max(100, t("form.nameMaxLength")),
         description: z
           .string()
-          .max(500, t("form.descriptionMaxLength"))
+          .max(1000, t("form.descriptionMaxLength"))
           .optional(),
         image: z
           .union([z.string().url(t("form.imageInvalid")), z.literal("")])

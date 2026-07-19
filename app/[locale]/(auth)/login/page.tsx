@@ -2,7 +2,7 @@ import Image from "next/image";
 import { LoginForm } from "./_components/login-form";
 
 export const metadata = {
-  title: "Sign In — SNC Beauty Salon & Spa",
+  title: "Sign In - SNC Beauty Salon & Spa",
 };
 
 export default function LoginPage() {

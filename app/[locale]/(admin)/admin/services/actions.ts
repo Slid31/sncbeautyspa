@@ -31,7 +31,7 @@ export type CategoryOption = {
 
 const serviceSchema = z.object({
   name: z.string().min(1).max(100),
-  description: z.string().max(1000).optional(),
+  description: z.string().max(2500).optional(),
   price: z.coerce.number().positive().max(10_000),
   duration: z.coerce.number().int().min(1).max(480),
   categoryId: z.string().min(1),

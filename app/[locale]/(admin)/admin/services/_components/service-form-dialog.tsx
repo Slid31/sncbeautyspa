@@ -43,7 +43,7 @@ import type { ServiceRow, CategoryOption } from "../actions";
 // z.coerce.number() _output is `number`, so FormValues.price is `number`.
 const _baseSchema = z.object({
   name: z.string().min(1).max(100),
-  description: z.string().max(1000).optional(),
+  description: z.string().max(2500).optional(),
   price: z.coerce.number().positive().max(10_000),
   duration: z.coerce.number().int().min(1).max(480),
   categoryId: z.string().min(1),
@@ -76,7 +76,7 @@ export function ServiceFormDialog({ open, onClose, service, categories }: Props)
           .max(100, t("form.nameMaxLength")),
         description: z
           .string()
-          .max(1000, t("form.descriptionMaxLength"))
+          .max(2500, t("form.descriptionMaxLength"))
           .optional(),
         price: z.coerce
           .number({ message: t("form.priceRequired") })
