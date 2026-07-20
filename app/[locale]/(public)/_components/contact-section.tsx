@@ -76,9 +76,8 @@ export function ContactSection() {
                 {t("hours")}
               </p>
               <ul className="space-y-1.5 text-sm text-slate-600">
-                <HourRow day={t("monFri")}  hours="9:00 – 18:00" />
-                <HourRow day={t("saturday")} hours="10:00 – 16:00" />
-                <HourRow day={t("sunday")}  hours={t("closed")} closed />
+                <HourRow day={t("tueSat")}  hours="9:00 AM – 7:00 PM" />
+                <HourRow day={t("sunday")} hours="10:00 AM – 5:00 PM" />
               </ul>
             </div>
           </div>
