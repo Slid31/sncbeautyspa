@@ -99,11 +99,6 @@ export function HeroSlider({
           Elevate Your Beauty &amp; Wellness
         </p>
 
-        {/* Title */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-4 max-w-2xl">
-          {title}
-        </h1>
-
         {/* Intro sentence */}
         <p className="text-xs sm:text-sm text-white/70 max-w-xl leading-relaxed mb-3 font-light">
           {intro}
@@ -111,7 +106,6 @@ export function HeroSlider({
 
         {/* Services label + list */}
         <p className="text-sm sm:text-base text-white max-w-2xl leading-relaxed mb-9 font-bold">
-          {servicesLabel}{" "}
           {subtitle}
         </p>
 
