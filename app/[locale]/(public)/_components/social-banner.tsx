@@ -23,14 +23,13 @@ const SOCIALS = [
   },
   {
     name: "TikTok",
-    href: "#",
+    href: "https://www.tiktok.com/@fasthion_salon?_r=1&_t=ZP-98C2gFZ5uhj",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
         <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z" />
       </svg>
     ),
     label: "SNC Beauty on TikTok",
-    comingSoon: true,
   },
 ];
 
@@ -42,33 +41,19 @@ export function SocialBanner() {
           Follow us
         </span>
 
-        {SOCIALS.map((s) =>
-          s.comingSoon ? (
-            <span
-              key={s.name}
-              title="TikTok — coming soon"
-              className="relative inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-white/40 text-sm font-medium cursor-default select-none"
-            >
-              {s.icon}
-              <span>{s.name}</span>
-              <span className="absolute -top-1 -right-1 text-[9px] bg-white/20 text-white px-1 rounded-full leading-tight">
-                soon
-              </span>
-            </span>
-          ) : (
-            <Link
-              key={s.name}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={s.label}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-colors"
-            >
-              {s.icon}
-              <span>{s.name}</span>
-            </Link>
-          )
-        )}
+        {SOCIALS.map((s) => (
+          <Link
+            key={s.name}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-colors"
+          >
+            {s.icon}
+            <span>{s.name}</span>
+          </Link>
+        ))}
       </div>
     </div>
   );
