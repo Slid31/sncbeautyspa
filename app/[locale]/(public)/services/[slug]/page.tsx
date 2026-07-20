@@ -105,12 +105,14 @@ export default async function ServiceDetailPage({ params }: Props) {
 
           {/* Book CTA */}
           <div className="mt-auto pt-2">
-            <Link
-              href={`/book/${service.id}`}
+            <a
+              href={process.env.NEXT_PUBLIC_BOOKING_URL ?? "/book"}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center w-full sm:w-auto px-10 py-3.5 rounded-full bg-pink-600 text-white font-semibold text-base hover:bg-pink-700 active:scale-95 transition-all shadow-lg shadow-pink-200"
             >
               {t("bookNow")}
-            </Link>
+            </a>
           </div>
         </div>
       </div>

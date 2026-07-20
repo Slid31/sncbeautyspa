@@ -11,11 +11,13 @@ interface Props {
 export async function PublicNavbar({ locale: _locale }: Props) {
   const t = await getTranslations("nav");
 
+  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? "/book";
+
   const navLinks = [
     { href: "/", label: t("home") },
     { href: "/services", label: t("services") },
     { href: "/policies", label: t("policies") },
-    { href: "/book", label: t("booking") },
+    { href: bookingUrl, label: t("booking") },
   ];
 
   return (
@@ -49,19 +51,21 @@ export async function PublicNavbar({ locale: _locale }: Props) {
         {/* Right: Book Now + Language switcher + Mobile menu toggle */}
         <div className="flex items-center gap-3">
           {/* Book CTA — hidden on small, shown sm+ */}
-          <Link
-            href="/book"
+          <a
+            href={bookingUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center px-4 py-1.5 rounded-full bg-pink-600 text-white text-sm font-medium hover:bg-pink-700 transition-colors"
           >
             {t("booking")}
-          </Link>
+          </a>
 
           <PublicLanguageSwitcher />
 
           <MobileMenu
             links={navLinks}
             bookLabel={t("booking")}
-            bookHref="/book"
+            bookHref={bookingUrl}
           />
         </div>
       </div>

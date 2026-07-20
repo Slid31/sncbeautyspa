@@ -7,6 +7,7 @@ type Props = { params: Promise<{ locale: string }> };
 
 export default async function HomePage({ params }: Props) {
   const [, t] = await Promise.all([params, getTranslations("home")]);
+  const bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL ?? "/book";
 
   return (
     <>
@@ -41,13 +42,15 @@ export default async function HomePage({ params }: Props) {
 
           {/* CTAs */}
           <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href={`/book`}
+            <a
+              href={bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-pink-600 text-white font-semibold text-base hover:bg-pink-700 active:scale-95 transition-all shadow-lg shadow-pink-200"
             >
               {t("hero.cta")}
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
             <Link
               href={`/services`}
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border-2 border-slate-200 text-slate-700 font-semibold text-base hover:border-pink-300 hover:text-pink-700 transition-colors"
