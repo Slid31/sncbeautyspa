@@ -107,8 +107,8 @@ export function HeroSlider({
           {title}
         </h1>
 
-        {/* Subtitle */}
-        <p className="text-base sm:text-lg text-white/70 max-w-lg leading-relaxed mb-9 font-light">
+        {/* Subtitle — service list */}
+        <p className="text-sm sm:text-base text-white/70 max-w-2xl leading-relaxed mb-9 font-light">
           {subtitle}
         </p>
 
