@@ -59,7 +59,6 @@ export function ContactSection() {
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-3">
             {t("title")}
           </h2>
-          <p className="text-slate-500 max-w-lg mx-auto">{t("subtitle")}</p>
         </div>
 
         <div className="grid gap-10 lg:grid-cols-5 items-start mb-10">
@@ -68,6 +67,7 @@ export function ContactSection() {
             <InfoCard icon={MessageSquare} label="SMS" value="+1 347-313-6461" href="sms:+13473136461" />
             <InfoCard icon={WhatsAppIcon} label="WhatsApp" value="+1 347-313-6461" href="https://wa.me/13473136461" />
             <InfoCard icon={Mail}  label={t("email")} value="sncbeauty1@gmail.com" href="mailto:sncbeauty1@gmail.com" />
+            <p className="text-sm text-slate-500 px-1">{t("subtitle")}</p>
             {/* <InfoCard icon={MapPin} label={t("address")} value={t("addressValue")} /> */}
 
             {/* Hours */}
@@ -186,11 +186,13 @@ function InfoCard({
   label,
   value,
   href,
+  subtitle,
 }: {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
   value: string;
   href?: string;
+  subtitle?: string;
 }) {
   const inner = (
     <div className="flex items-start gap-4 rounded-2xl border border-pink-100 bg-white p-5 shadow-sm">
@@ -202,6 +204,7 @@ function InfoCard({
           {label}
         </p>
         <p className="text-sm font-medium text-slate-800">{value}</p>
+        {subtitle && <p className="text-xs text-slate-500 mt-1">{subtitle}</p>}
       </div>
     </div>
   );
