@@ -128,9 +128,11 @@ export function CategoriesView({ categories }: Props) {
                 ) : (
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {cat.services.map((svc) => (
-                      <Link
+                      <a
                         key={svc.id}
-                        href={`/services/${svc.id}`}
+                        href={process.env.NEXT_PUBLIC_BOOKING_URL ?? "/book"}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group flex flex-col rounded-xl border border-slate-200 bg-white hover:border-pink-200 hover:shadow-sm transition-all overflow-hidden"
                       >
                         {/* Service image */}
@@ -176,7 +178,7 @@ export function CategoriesView({ categories }: Props) {
                             {t("bookNow")}
                           </span>
                         </div>
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 )}
