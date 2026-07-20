@@ -67,7 +67,6 @@ export function ContactSection() {
             <InfoCard icon={MessageSquare} label="SMS" value="+1 347-313-6461" href="sms:+13473136461" />
             <InfoCard icon={WhatsAppIcon} label="WhatsApp" value="+1 347-313-6461" href="https://wa.me/13473136461" />
             <InfoCard icon={Mail}  label={t("email")} value="sncbeauty1@gmail.com" href="mailto:sncbeauty1@gmail.com" />
-            <p className="text-sm text-slate-500 px-1">{t("subtitle")}</p>
             {/* <InfoCard icon={MapPin} label={t("address")} value={t("addressValue")} /> */}
 
             {/* Hours */}
@@ -157,6 +156,7 @@ export function ContactSection() {
                   <Send className="h-4 w-4" />
                   {form.formState.isSubmitting ? t("sending") : t("send")}
                 </Button>
+                <p className="text-sm text-slate-500 italic text-center">{t("subtitle")}</p>
               </form>
             )}
           </div>
