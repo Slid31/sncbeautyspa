@@ -99,8 +99,9 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Beauté et bien-être primés",
-      "title": "Élevez votre beauté\net votre bien-être",
+      "title": "Votre beauté.\nNotre expertise.",
+      "intro": "Venez vous détendre au SNC Beauty Salon & SPA - des services haut de gamme et une expertise complète en soins capillaires et spa.",
+      "servicesLabel": "Nous offrons tous les services suivants :",
       "subtitle": "Soins du visage · Poils incarnés · Lamination des sourcils · Lift des cils · Extensions de cils · Épilation · Blanchiment dentaire · Gems · Manucure & Pédicure SPA · Massothérapie SPA · Soirée SPA · Extensions capillaires · Coiffure naturelle",
       "cta": "Réserver maintenant",
       "ctaSecondary": "Découvrir nos services"
@@ -116,7 +117,7 @@
     "contact": {
       "eyebrow": "Contactez-nous",
       "title": "Nous joindre",
-      "subtitle": "Une question ou vous souhaitez réserver par téléphone ? Nous serions ravis de vous entendre.",
+      "subtitle": "Nous serions ravis de vous entendre.",
       "phone": "Téléphone",
       "email": "Courriel",
       "address": "Adresse",

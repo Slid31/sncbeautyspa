@@ -99,11 +99,12 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Award-winning beauty & wellness",
-      "title": "Elevate Your Beauty\n& Wellness",
+      "title": "Your Beauty.\nOur Expertise.",
+      "intro": "You can now relax and join SNC Beauty Salon & SPA - offering top of the line service and expertise in all hair salons and skincare.",
+      "servicesLabel": "We offer all services ranging from:",
       "subtitle": "Facials · Ingrown Hair · Brow Lamination · Lash Lift · Lash Extensions · Waxing · Teeth Whitening · Gems Application · SPA Manicure & Pedicure · SPA Massage Therapy · SPA Party · Hair Extensions · Natural Hair Stylist",
       "cta": "Book Now",
-      "ctaSecondary": "Explore Services"
+      "ctaSecondary": "Explore our Services"
     },
     "featuredServices": "Popular Services",
     "featuredSubtitle": "A taste of what we offer - browse the full menu to find your perfect treatment.",
@@ -116,7 +117,7 @@
     "contact": {
       "eyebrow": "Get in touch",
       "title": "Contact Us",
-      "subtitle": "Have a question or want to book by phone? We'd love to hear from you.",
+      "subtitle": "We'd love to hear from you.",
       "phone": "Phone",
       "email": "Email",
       "address": "Address",

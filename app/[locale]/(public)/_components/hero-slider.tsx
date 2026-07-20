@@ -19,8 +19,9 @@ const INTERVAL = 5000;
 
 interface Props {
   title: string;
+  intro: string;
+  servicesLabel: string;
   subtitle: string;
-  eyebrow: string;
   cta: string;
   ctaSecondary: string;
   bookingUrl: string;
@@ -29,8 +30,9 @@ interface Props {
 
 export function HeroSlider({
   title,
+  intro,
+  servicesLabel,
   subtitle,
-  eyebrow,
   cta,
   ctaSecondary,
   bookingUrl,
@@ -99,16 +101,22 @@ export function HeroSlider({
       <div className="absolute bottom-0 left-0 right-0 z-10 px-8 sm:px-14 pb-16 sm:pb-20">
         {/* Eyebrow */}
         <p className="mb-4 text-[11px] font-semibold tracking-[0.22em] uppercase text-amber-300">
-          {eyebrow}
+          Elevate Your Beauty &amp; Wellness
         </p>
 
         {/* Title */}
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-5 max-w-2xl">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight mb-4 max-w-2xl">
           {title}
         </h1>
 
-        {/* Subtitle — service list */}
-        <p className="text-sm sm:text-base text-white/70 max-w-2xl leading-relaxed mb-9 font-light">
+        {/* Intro sentence */}
+        <p className="text-xs sm:text-sm text-white/70 max-w-xl leading-relaxed mb-3 font-light">
+          {intro}
+        </p>
+
+        {/* Services label + list */}
+        <p className="text-sm sm:text-base text-white max-w-2xl leading-relaxed mb-9 font-bold">
+          {servicesLabel}{" "}
           {subtitle}
         </p>
 

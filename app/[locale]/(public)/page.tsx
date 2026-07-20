@@ -14,8 +14,9 @@ export default async function HomePage({ params }: Props) {
       {/* ── Hero Slider ───────────────────────────────────────────────── */}
       <HeroSlider
         title={t("hero.title")}
+        intro={t("hero.intro")}
+        servicesLabel={t("hero.servicesLabel")}
         subtitle={t("hero.subtitle")}
-        eyebrow={t("hero.eyebrow")}
         cta={t("hero.cta")}
         ctaSecondary={t("hero.ctaSecondary")}
         bookingUrl={bookingUrl}
