@@ -92,11 +92,6 @@ export function HeroSlider({
       {/* Dark gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
 
-      {/* Counter */}
-      <span className="absolute top-8 right-10 z-10 text-white/40 text-xs tracking-widest font-light select-none">
-        {String(current + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
-      </span>
-
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 z-10 px-8 sm:px-14 pb-16 sm:pb-20">
         {/* Eyebrow */}
