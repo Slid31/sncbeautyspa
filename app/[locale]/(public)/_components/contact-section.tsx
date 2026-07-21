@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import type { Resolver } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { Mail, Phone, CheckCircle2, Send, MessageSquare } from "lucide-react";
+import { Mail, Phone, CheckCircle2, Send, MessageSquare, MapPin } from "lucide-react";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -67,6 +67,7 @@ export function ContactSection() {
             <InfoCard icon={MessageSquare} label="SMS" value="+1 347-313-6461" href="sms:+13473136461" />
             <InfoCard icon={WhatsAppIcon} label="WhatsApp" value="+1 347-313-6461" href="https://wa.me/13473136461" />
             <InfoCard icon={Mail}  label={t("email")} value="sncbeauty1@gmail.com" href="mailto:sncbeauty1@gmail.com" />
+            <InfoCard icon={MapPin} label={t("address")} value="2795 3rd Ave, Bronx, NY 10455" href="https://maps.google.com/?q=2795+3rd+Ave,+Bronx,+NY+10455" />
             {/* <InfoCard icon={MapPin} label={t("address")} value={t("addressValue")} /> */}
 
             {/* Hours */}
